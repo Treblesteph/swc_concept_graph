@@ -1,0 +1,29 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{site.title}}{% if page.subtitle %}: {{page.subtitle}}{% endif %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css" />
+    <meta name="description" content="{{site.description}}" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="top" class="page">
+
+    <h1><a href="/">{{site.title}}</a>{% if page.subtitle %}: {{ page.subtitle }}{% endif %}</h1>
+{{ content }}
+
+    <footer>
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.min.js"></script>
+  </body>
+</html>
