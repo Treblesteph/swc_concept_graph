@@ -76,16 +76,25 @@ def create_blank_image(size):
 def create_flaw(image, p_radius, verbose):
     '''Create a single flaw in the image.  Flaws may overlap each other, but not the edge.'''
 
+    # Blob radius.
     size = image.shape[0]
     assert size == image.shape[1], \
            'Expecting square image, not {0}x{1}'.format(size, image.shape[1])
     radius = size
     while radius >= size/2:
         radius = np.random.geometric(p_radius)
+
+    # Blob center.
     c_x, c_y = np.random.randint(radius, size - radius, 2)
-    image[c_x-radius:c_x+radius, c_y-radius:c_y+radius, :] = 0
     if verbose:
         print('flaw ({0}, {1}) x {2}'.format(c_x, c_y, radius), file=sys.stderr)
+
+    # Fill.
+    coords = np.arange(size)
+    dist_sq_x = (coords - c_x) ** 2
+    dist_sq_y = (coords - c_y) ** 2
+    dist_sq = dist_sq_x[:, np.newaxis] + dist_sq_y[np.newaxis, :]
+    image[dist_sq < radius**2] = 0
 
 
 if __name__ == '__main__':
