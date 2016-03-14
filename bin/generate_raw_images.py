@@ -94,7 +94,7 @@ def create_flaw(image, p_radius, verbose):
     dist_sq_x = (coords - c_x) ** 2
     dist_sq_y = (coords - c_y) ** 2
     dist_sq = dist_sq_x[:, np.newaxis] + dist_sq_y[np.newaxis, :]
-    image[dist_sq < radius**2] = 0
+    image[dist_sq < radius**2, :] = 0
 
 
 if __name__ == '__main__':
