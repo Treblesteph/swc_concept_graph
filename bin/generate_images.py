@@ -3,7 +3,7 @@
 '''
 Synthesize image files used as source for running example.
 
-Usage: generate_raw_images.py -b background -n p_flaws -o output_file -r p_radius -s rand_seed -v -w size
+Usage: generate_images.py -b background -n p_flaws -o output_file -r p_radius -s rand_seed -v -w size
 
 where:
 -b background  = background fuzzing range of blob
@@ -47,11 +47,11 @@ def main():
     flaws = []
 
     if params.num_files is None:
-        generate_raw_image(params, params.output_file, flaws)
+        generate_image(params, params.output_file, flaws)
     else:
         for i in range(params.num_files):
             output_file = params.output_file.replace('%', '{0:04d}'.format(i))
-            generate_raw_image(params, output_file, flaws)
+            generate_image(params, output_file, flaws)
 
     if params.verbose:
         writer = csv.writer(sys.stdout)
@@ -105,7 +105,7 @@ def parse_args():
     return params
 
 
-def generate_raw_image(params, output_file, flaws):
+def generate_image(params, output_file, flaws):
     '''Create a single output image, appending flaws to accumulator.'''
 
     image = create_blank_image(params.size)
