@@ -11,3 +11,4 @@ subtitle: Links
 * [Andrew and Sabina](https://twitter.com/PsychScientists/status/702074584707817472): Replication is a side effect of understanding something well enough to produce it on demand. Latter lets you move on.
 * [Design Patterns for Sharing Data](http://project-if.github.io/data-permissions-catalogue/)
 * [Daff](http://paulfitz.github.io/daff/) for data diffs
+* Computers can store, repeat, decide, display, and communicate
