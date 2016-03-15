@@ -13,10 +13,13 @@ where:
 -s rand_seed   = RNG seed (large integer)
 -v             = verbose
 -w size        = image width/height in pixels (typically 480-800)
+
+If 'verbose' is set, the output is a CSV list of (filename, center_x, center_y, radius) records.
 '''
 
 
 import sys
+import csv
 import argparse
 import numpy as np
 from skimage.io import imsave
@@ -33,9 +36,18 @@ def main():
     np.random.seed(params.rand_seed)
     image = create_blank_image(params.size)
     num_flaws = np.random.geometric(params.p_flaws)
-    for flaw in range(num_flaws):
-        create_flaw(image, params.p_radius, params.fuzzing, params.verbose)
+
+    flaws = []
+    for i in range(num_flaws):
+        center_x, center_y, radius = \
+            create_flaw(image, params.p_radius, params.fuzzing, params.verbose)
+        flaws.append([params.output_file, center_x, center_y, radius])
+
     imsave(params.output_file, image)
+
+    if params.verbose:
+        writer = csv.writer(sys.stdout)
+        writer.writerows(flaws)
 
 
 def parse_args():
@@ -110,8 +122,7 @@ def create_flaw(image, p_radius, fuzzing, verbose):
     # Fill.
     image[c_x-radius:c_x+radius+1, c_y-radius:c_y+radius+1] += blob
 
-    if verbose:
-        print('flaw ({0}, {1}) x {2}'.format(c_x, c_y, radius), file=sys.stderr)
+    return (c_x, c_y, radius)
 
 
 if __name__ == '__main__':
