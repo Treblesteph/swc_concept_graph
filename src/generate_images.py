@@ -54,7 +54,7 @@ def main():
             generate_image(params, output_file, flaws)
 
     if params.verbose:
-        writer = csv.writer(sys.stdout)
+        writer = csv.writer(sys.stdout, dialect='unix')
         writer.writerows(flaws)
 
 
