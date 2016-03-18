@@ -21,18 +21,17 @@ def main():
             filename = row[0]
             actual[filename] += 1
 
-    found = {}
+    result = []
     for filename in actual:
-        found[filename] = len(find_regions(filename))
+        found = len(find_regions(filename))
+        diff = actual[filename] - found
+        if   diff > 0:  sign = '>'
+        elif diff == 0: sign = '='
+        else:           sign = '<'
+        result.append([filename, actual[filename], found, sign])
 
-    for filename in actual:
-        symbol = '<=>'[1 + sign(actual[filename] - found[filename])]
-        print(filename, symbol, actual[filename], found[filename])
-
-def sign(x):
-    if x < 0: return -1
-    elif x == 0: return 0
-    else: return 1
+    writer = csv.writer(sys.stdout)
+    writer.writerows(result)
 
 
 if __name__ == '__main__':
