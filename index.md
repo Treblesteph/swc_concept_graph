@@ -6,6 +6,7 @@ like those run by [Data Carpentry][dc-website] and [Software Carpentry][swc-webs
 
 *   [License](LICENSE.html)
 *   [Code of Conduct](CONDUCT.html)
+*   [Course Design](design.html)
 
 [dc-website]: http://datacarpentry.org
 [swc-website]: http://software-carpentry.org
