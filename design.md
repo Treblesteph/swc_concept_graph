@@ -4,7 +4,7 @@ subtitle: Course Design
 ---
 ## Overview
 
-This material is meant to be used in a five-day workshop
+This material is meant to be used in a two-week workshop
 similar to those run by [Software Carpentry][swc-website] and [Data Carpentry][dc-website].
 The outline below was developed using a slimmed-down variant of the "Understanding by Design" process.
 The main sections are:
@@ -16,39 +16,40 @@ The main sections are:
     *   Who understand very basic statistics (mean, standard deviation, correlation coefficient)
     *   And have manipulated data in spreadsheets and with interactive tools like SAS
     *   But have *not* programmed beyond CPD (copy-paste-despair)
-*   Constraints
-    *   Five full days, 09:00-16:00 each day
-        *   1:00 for lunch
-        *   0:30 total for two coffee breaks
-        *   05:30 teaching time per day
-        *   27:30 total teaching time
-    *   Learners use native installs on their own machines
-        *   May use VMs or cloud resources at instructor's discretion
-        *   But must keep native local install as an option
-*   Motivating Example
-    *   Learner has inherited a messy project and needs to:
-        *   Organize and clean up the code and data
-        *   Automate and extend the existing analysis
-        *   Prepare a publication
-*   Exercises will mostly *not* be "write this code from scratch"
-    *   Want lots of short exercises that can reliably be finished in allotted time
-    *   So use MCQs, fill-in-the-blanks, Parsons Problems, "tweak this code", etc.
+*   Ten full days, 09:00-16:00 each day
+    *   1:00 for lunch
+    *   1:00 total for breaks
+    *   05:00 per day
+    *   50:00 total time
+*   Learners use native installs on their own machines
+    *   May use VMs or cloud resources at instructor's discretion
+    *   But must keep native local install as an option
 *   Lesson materials
     *   Notes for instructors and self-study will be written in Markdown
 
 ## Coarse Outline
 
-| **Day** | **Session** | **Subject**                         |
-| Mon     | a.m.        | Unix Shell                          |
-|         | p.m.        | Git                                 |
-| Tue     | a.m.        | Python 1                            |
-|         | p.m.        | Python 2                            |
-| Wed     | a.m.        | SQL                                 |
-|         | p.m.        | Regular Expressions/Data Management |
-| Thu     | a.m.        | Make                                |
-|         | p.m.        | Testing/Packaging                   |
-| Fri     | a.m.        | Publishing                          |
-|         | p.m.        | Using the Web                       |
+| **Week** | **Day** | **Session** | **Subject**                         |
+| 1        | Mon     | a.m.        | Unix Shell                          |
+|          |         | p.m.        | Git                                 |
+|          | Tue     | a.m.        | Python 1 (loops and conditionals)   |
+|          |         | p.m.        | Python 2 (functions)                |
+|          | Wed     | a.m.        | Plotting                            |
+|          |         | p.m.        | Regular Expressions + OpenRefine    |
+|          | Thu     | a.m.        | SQL                                 |
+|          |         | p.m.        | Using Spreadsheets Well             |
+|          | Fri     | a.m.        | Modern Scientific Authoring         |
+|          |         | p.m.        | Capstone 1                          |
+| 2        | Mon     | a.m.        | Testing + Debugging                 |
+|          |         | p.m.        | Python 3 (structures and patterns)  |
+|          | Tue     | a.m.        | Make for Reproducible Research      |
+|          |         | p.m.        | Installation + Configuration        |
+|          | Wed     | a.m.        | Cloud Computing                     |
+|          |         | p.m.        | FIXME                               |
+|          | Thu     | a.m.        | FIXME                               |
+|          |         | p.m.        | FIXME                               |
+|          | Fri     | a.m.        | Open Science                        |
+|          |         | p.m.        | Capstone 2                          |
 
 ## Desired Results
 
