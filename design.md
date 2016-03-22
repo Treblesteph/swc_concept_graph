@@ -46,8 +46,8 @@ The main sections are:
 |          |         | p.m.        | Installation + Configuration         |
 |          | Tue     | a.m.        | Testing                              |
 |          |         | p.m.        | Code Review / Debugging              |
-|          | Wed     | a.m.        | FIXME                                |
-|          |         | p.m.        | Data Wrangling / Data Hygiene        |
+|          | Wed     | a.m.        | Data Wrangling / Data Hygiene        |
+|          |         | p.m.        | Using APIs / Publishing Data         |
 |          | Thu     | a.m.        | Using Clusters                       |
 |          |         | p.m.        | Open Science                         |
 |          | Fri     | a.m.        | Capstone 2                           |
