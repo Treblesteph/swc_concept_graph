@@ -29,27 +29,34 @@ The main sections are:
 
 ## Coarse Outline
 
-| **Week** | **Day** | **Session** | **Subject**                         |
-| 1        | Mon     | a.m.        | Unix Shell                          |
-|          |         | p.m.        | Git                                 |
-|          | Tue     | a.m.        | Python 1 (loops and conditionals)   |
-|          |         | p.m.        | Python 2 (functions)                |
-|          | Wed     | a.m.        | Plotting                            |
-|          |         | p.m.        | Regular Expressions + OpenRefine    |
-|          | Thu     | a.m.        | SQL                                 |
-|          |         | p.m.        | Using Spreadsheets Well             |
-|          | Fri     | a.m.        | Modern Scientific Authoring         |
-|          |         | p.m.        | Capstone 1                          |
-| 2        | Mon     | a.m.        | Testing + Debugging                 |
-|          |         | p.m.        | Python 3 (structures and patterns)  |
-|          | Tue     | a.m.        | Make for Reproducible Research      |
-|          |         | p.m.        | Installation + Configuration        |
-|          | Wed     | a.m.        | Cloud Computing                     |
-|          |         | p.m.        | FIXME                               |
-|          | Thu     | a.m.        | FIXME                               |
-|          |         | p.m.        | FIXME                               |
-|          | Fri     | a.m.        | Open Science                        |
-|          |         | p.m.        | Capstone 2                          |
+| **Week** | **Day** | **Session** | **Subject**                          |
+| 1        | Mon     | a.m.        | Spreadsheets / OpenRefine            |
+|          |         | p.m.        | SQL                                  |
+| 1        | Mon     | a.m.        | Unix Shell 1                         |
+|          |         | p.m.        | Python 1 (loops and conditionals)    |
+|          | Tue     | a.m.        | Python 2 (functions)                 |
+|          |         | p.m.        | Plotting                             |
+|          | Wed     | a.m.        | Git                                  |
+|          |         | p.m.        | Regular Expressions / Unix Shell 2   |
+|          | Thu     | a.m.        | Python 3 (structures and patterns)   |
+|          |         | p.m.        | FIXME                                |
+|          | Fri     | a.m.        | Markdown / Publishing                |
+|          |         | p.m.        | Capstone 1                           |
+| 2        | Mon     | a.m.        | Make for Reproducible Research       |
+|          |         | p.m.        | Installation + Configuration         |
+|          | Tue     | a.m.        | Testing                              |
+|          |         | p.m.        | Code Review / Debugging              |
+|          | Wed     | a.m.        | FIXME                                |
+|          |         | p.m.        | Data Wrangling / Data Hygiene        |
+|          | Thu     | a.m.        | Using Clusters                       |
+|          |         | p.m.        | Open Science                         |
+|          | Fri     | a.m.        | Capstone 2                           |
+|          |         | p.m.        | Capstone 2 (cont.)                   |
+
+Missing:
+
+* using an editor
+* interfacing with hardware
 
 ## Desired Results
 
