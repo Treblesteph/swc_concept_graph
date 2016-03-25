@@ -27,73 +27,121 @@ The main sections are:
 *   Lesson materials
     *   Notes for instructors and self-study will be written in Markdown
 
-## Coarse Outline
+## Essential Questions
 
-| **Week** | **Day** | **Session** | **Subject**                          |
-| 1        | Mon     | a.m.        | Spreadsheets / OpenRefine            |
-|          |         | p.m.        | SQL                                  |
-| 1        | Mon     | a.m.        | Unix Shell 1                         |
-|          |         | p.m.        | Python 1 (loops and conditionals)    |
-|          | Tue     | a.m.        | Python 2 (functions)                 |
-|          |         | p.m.        | Plotting                             |
-|          | Wed     | a.m.        | Git                                  |
-|          |         | p.m.        | Regular Expressions / Unix Shell 2   |
-|          | Thu     | a.m.        | Python 3 (structures and patterns)   |
-|          |         | p.m.        | FIXME                                |
-|          | Fri     | a.m.        | Markdown / Publishing                |
-|          |         | p.m.        | Capstone 1                           |
-| 2        | Mon     | a.m.        | Make for Reproducible Research       |
-|          |         | p.m.        | Installation + Configuration         |
-|          | Tue     | a.m.        | Testing                              |
-|          |         | p.m.        | Code Review / Debugging              |
-|          | Wed     | a.m.        | Data Wrangling / Data Hygiene        |
-|          |         | p.m.        | Using APIs / Publishing Data         |
-|          | Thu     | a.m.        | Using Clusters                       |
-|          |         | p.m.        | Open Science                         |
-|          | Fri     | a.m.        | Capstone 2                           |
-|          |         | p.m.        | Capstone 2 (cont.)                   |
+These are reverse engineered from the Goals sections of
+"[Good Enough Practices in Scientific Computing][good-enough]".
 
-Missing:
+1. How can I avoid losing work?
+   *   Prefer open text formats to proprietary non-text formats
+   *   Store work in a remotely-hosted version control repository
+   *   Put everything created by a human being into version control as soon as it's created
+2. How can I make it easy for people to find and use my data?
+   *   Store all raw data exactly as it arrived (but use common sense for large data)
+   *   Use semantically-meaningful path names
+   *   Store metadata with data as plain text
+   *   Submit data to a reputable DOI issuer
+3. How can I make it easy for programs to use my data?
+   *   Make every value atomic
+   *   Give every record a unique key
+   *   Apply these same rules to metadata
+   *   Use path names that are easy to sort and to match with simple regular expressions
+4. How can I make it easy for people to find and use my software?
+   *   Make requirements/dependencies explicit (preferably in machine-usable form)
+   *   Use a publicly-hosted version control repository
+   *   Submit software to a reputable DOI issuer
+   *   Include a README file explaining its scope (and giving a working contact address)
+5. How can I make it easy for people to understand my software?
+   *   Begin every program with an explanatory comment that includes an example of use
+   *   Give values, functions, and classes meaningful names
+   *   Break programs into short functions that take a small number of parameters and have no side effects
+   *   Avoid duplicating functionality within modules
+   *   Use data structures with named parts
+   *   Re-use libraries rather than writing equivalents
+   *   Use configuration files and conditionals to control behavior rather than commenting and uncommenting
+6. How can I make it easy for people to reproduce my results?
+   *   Organize the project's contents according to [Noble's Rules][noble-rules]
+   *   Represent every analysis step textually (complete with parameter values)
+   *   Record data normalization steps like other data processing steps
+   *   Document analysis steps in machine-usable form (e.g., a script or Makefile)
+7. How can I make it easy for people to collaborate with me?
+   *   Add assertions to the software to document invariants
+   *   Provide simple re-runnable end-to-end test cases
+   *   Maintain a to-do list for each project
+   *   Make the project's license explicit
+   *   Maintain a checklist of things to do before sharing a change
+8. How can I make it easy for my collaborators and I to co-author manuscripts?
+   *   Keep the master copy of every manuscript on the web (version control or Google Docs)
+   *   Document publishing steps in machine-usable form (e.g., a script or Makefile)
+9. How can I make it easy for people to give me credit for my work?
+   *   Make the preferred citation(s) for projects explicit
 
-* using an editor
-* interfacing with hardware
+## Key Insights
 
-## Desired Results
+1.  It's all just data, but data doesn't mean anything on its own
+2.  Models for computers, views for people
+3.  Program by creating and composing abstractions
+4.  Software is just another kind of lab equipment
+5.  Better code is better than better hardware
+6.  The less we think, the more productive we are
+7.  We are smarter together
 
-### Goals
+## Course Outline
 
-1.  Teach learners the skills described in "[Good Enough Practices in Scientific Computing][good-enough]"
-2.  Enable them to make sense of other onlines tutorials and resources
-3.  Convey core principles:
-    1.  It's all just data, but data doesn't mean anything on its own
-    2.  Models are for computers, and views are for people
-    3.  Programming is about creating and composing abstractions
-    4.  Better code is better than better hardware
-    5.  Paranoia makes us productive
-    6.  We are smarter together
+| **Week** | **Day** | **Session** | **Subject**                          | *Slug*                 |
+| 1        | Mon     | a.m.        | Spreadsheets / OpenRefine            | tabular                |
+|          |         | p.m.        | SQL                                  | sql                    |
+| 1        | Mon     | a.m.        | Unix Shell 1                         | shell_01               |
+|          |         | p.m.        | Python 1 (loops and conditionals)    | python_01              |
+|          | Tue     | a.m.        | Python 2 (functions)                 | python_02              |
+|          |         | p.m.        | Plotting                             | plotting               |
+|          | Wed     | a.m.        | Git                                  | git                    |
+|          |         | p.m.        | Regular Expressions / Unix Shell 2   | regexp / shell_02      |
+|          | Thu     | a.m.        | Python 3 (structures and patterns)   | python_3               |
+|          |         | p.m.        | FIXME                                |                        |
+|          | Fri     | a.m.        | Markdown / Publishing                | markdown / manuscript  |
+|          |         | p.m.        | Capstone 1                           | capstone_01            |
+| 2        | Mon     | a.m.        | Make for Reproducible Research       | make                   |
+|          |         | p.m.        | Installation + Configuration         | setup                  |
+|          | Tue     | a.m.        | Testing                              | qa                     |
+|          |         | p.m.        | Code Review / Debugging              | review / debug         |
+|          | Wed     | a.m.        | Data Wrangling                       | data                   |
+|          |         | p.m.        | Using APIs / Publishing Data         | api / datapub          |
+|          | Thu     | a.m.        | Performance / Using Clusters         | perf / clusters        |
+|          |         | p.m.        | Open Science                         | opensci                |
+|          | Fri     | a.m.        | Capstone 2                           | capstone_02            |
+|          |         | p.m.        | Capstone 2 (cont.)                   | capstone_02            |
 
-### Summative Assessment
+## Essential Questions
 
-*   Unix Shell: FIXME
-*   Git: FIXME
-*   Python 1: FIXME
-*   Python 2: FIXME
-*   SQL: FIXME
-*   Regular Expressions/Data Management: FIXME
-*   Make: FIXME
-*   Testing/Packaging: FIXME
-*   Publishing: FIXME
-*   Using the Web: FIXME
 
-### Essential Questions
+## Summative Assessment
 
-*   How do I organize my data so that other people (including my future self) can use it?
-*   How do I find and use software and data that other people have created?
-*   How do I build complex software efficiently?
-*   How do I tell if my software is correct?
-*   How do I fix it if it isn't?
-*   How do I make it easy for other people to use my software and data?
-*   How do I share my findings with other people?
+1. tabular
+1. sql
+1. shell_01
+1. python_01
+1. python_02
+1. plotting
+1. git
+1. regexp
+1. shell_02
+1. python_3
+1. markdown
+1. manuscript
+1. capstone_01
+1. make
+1. setup
+1. qa
+1. review
+1. debug
+1. data
+1. api
+1. datapub
+1. perf
+1. clusters
+1. opensci
+1. capstone_02
 
 ### Learners Will Be Able To...
 
@@ -329,3 +377,6 @@ Sub-directories in each project are organized according to Noble's rules:
 2. Tools needed to compile manuscripts (e.g., a makefile or a LaTeX style file)
    are included in the project folder (and kept under version control)
    just like tools used to do simulation or analysis.
+
+[good-enough]: http://github.com/swcarpentry/good-enough-practices-in-scientific-computing/
+[noble-rules]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424
