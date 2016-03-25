@@ -34,8 +34,14 @@ These are reverse engineered from the Goals sections of
 
 1. How can I avoid losing work?
    *   Prefer open text formats to proprietary non-text formats
+       *   [what-is-csv][]
+       *   [read-csv-files][]
    *   Store work in a remotely-hosted version control repository
+       *   [version-control-intro][]
+       *   [where-to-host-repository][]
    *   Put everything created by a human being into version control as soon as it's created
+       *   [add-to-repository][]
+       *   [update-repository][]
 2. How can I make it easy for people to find and use my data?
    *   Store all raw data exactly as it arrived (but use common sense for large data)
    *   Use semantically-meaningful path names
@@ -380,3 +386,10 @@ Sub-directories in each project are organized according to Noble's rules:
 
 [good-enough]: http://github.com/swcarpentry/good-enough-practices-in-scientific-computing/
 [noble-rules]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424
+
+[what-is-csv]: path.html "CSV Format"
+[read-csv-files]: path.html "Reading CSV Files"
+[version-control-intro]: path.html "Introducing Version Control"
+[where-to-host-repository]: path.html "Repository Hosting Options"
+[add-to-repository]: path.html "Adding Files to a Repository"
+[update-repository]: path.html "Updating a Repository"
