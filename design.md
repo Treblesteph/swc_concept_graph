@@ -33,80 +33,143 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
 ## Essential Questions
 
 01. How can I avoid losing work?
-    * Prefer open text formats to proprietary non-text formats: [what-is-csv][], [read-csv-files][]
-    * Store work in a remotely-hosted version control repository: [version-control-intro][], [where-to-host-repository][]
-    * Put everything created by a human being into version control as soon as it's created: [add-to-repository][], [update-repository][]
-    * Write good commit comments: [writing-good-commit-comments][]
+    * Prefer open text formats to proprietary non-text formats
+      * [what-is-csv][]
+      * [read-csv-files][]
+    * Store work in a remotely-hosted version control repository
+      * [version-control-intro][]
+      * [where-to-host-repository][]
+    * Put everything created by a human being into version control as soon as it's created
+      * [add-to-repository][]
+      * [update-repository][]
+    * Write good commit comments
+      * [writing-good-commit-comments][]
 02. How can I make it easy for people to find and use my data?
-    * Separate models from views: [models-vs-views][]
-    * Store raw data exactly as it arrived: [nobles-rules][]
-    * Don't duplicate large data: [what-not-to-store][]
-    * Use semantically-meaningful path names: [choosing-good-path-names][]
-    * Store metadata with data as plain text: [metadata][]
-    * Submit data to a reputable DOI issuer: [getting-doi][]
+    * Separate models from views
+      * [models-vs-views][]
+    * Store raw data exactly as it arrived
+      * [nobles-rules][]
+    * Don't duplicate large data
+      * [what-not-to-store][]
+    * Use semantically-meaningful path names
+      * [choosing-good-path-names][]
+    * Store metadata with data as plain text
+      * [metadata][]
+    * Submit data to a reputable DOI issuer
+      * [getting-doi][]
 03. How can I make it easy for programs to use my data?
-    * Make every value atomic: [data-hygiene][]
-    * Give every record a unique key: [data-hygiene][], [associative-structures][]
-    * Represent each fact once: [data-hygiene][]
-    * Apply these same rules to metadata: [metadata][]
-    * Use path names that are easy to sort and to match with simple regular expressions: [choosing-good-path-names][]
+    * Make every value atomic
+      * [data-hygiene][]
+    * Give every record a unique key
+      * [data-hygiene][]
+      * [associative-structures][]
+    * Represent each fact once
+      * [data-hygiene][]
+    * Apply these same rules to metadata
+      * [metadata][]
+    * Use path names that are easy to sort and to match with simple regular expressions
+      * [choosing-good-path-names][]
 04. How can I make it easy for people to find and use my software?
-    * Make requirements/dependencies explicit (preferably in machine-usable form): [documenting-requirements][]
-    * Use a publicly-hosted version control repository: [where-to-host-repository][]
-    * Submit software to a reputable DOI issuer: [getting-doi][]
-    * Include a README file explaining its scope (and giving a working contact address): [boilerplate][]
+    * Make requirements/dependencies explicit (preferably in machine-usable form)
+      * [documenting-requirements][]
+    * Use a publicly-hosted version control repository
+      * [where-to-host-repository][]
+    * Submit software to a reputable DOI issuer
+      * [getting-doi][]
+    * Include a README file explaining its scope (and giving a working contact address)
+      * [boilerplate][]
 05. How can I make it easy for people to understand my software?
-    * Begin every program with an explanatory comment that includes an example of use: [programming-style][]
-    * Give values, functions, and classes meaningful names: [programming-style][]
-    * Break programs into short functions that take a small number of parameters and have no side effects: [creating-functions][], [programming-style][]
-    * Avoid duplicating functionality within modules: [programming-style][]
-    * Use data structures with named parts: [associative-structures][]
-    * Re-use libraries rather than writing equivalents: [finding-software][], [using-libraries][]
-    * Use configuration files and conditionals rather than commenting: [conditionals][], [program-configuration][], [programming-style][]
-    * Remove unused code: [coverage][]
+    * Begin every program with an explanatory comment that includes an example of use
+      * [programming-style][]
+    * Give values, functions, and classes meaningful names
+      * [programming-style][]
+    * Break programs into short functions that take a small number of parameters and have no side effects
+      * [creating-functions][]
+      * [programming-style][]
+    * Avoid duplicating functionality within modules
+      * [programming-style][]
+    * Use data structures with named parts
+      * [associative-structures][]
+    * Re-use libraries rather than writing equivalents
+      * [finding-software][]
+      * [using-libraries][]
+    * Use configuration files and conditionals rather than commenting
+      * [conditionals][]
+      * [program-configuration][]
+      * [programming-style][]
+    * Remove unused code
+      * [coverage][]
 06. How can I tell if my results are correct?
-    * Add assertions to the software to document invariants: [defensive-programming][]
-    * Provide simple re-runnable end-to-end test cases: [creating-integrity-tests][]
-    * Write unit tests to specify and check behavior: [writing-unit-tests][]
-    * Run tests automatically before each commit: [continuous-integration][]
+    * Add assertions to the software to document invariants
+      * [defensive-programming][]
+    * Provide simple re-runnable end-to-end test cases
+      * [creating-integrity-tests][]
+    * Write unit tests to specify and check behavior
+      * [writing-unit-tests][]
+    * Run tests automatically before each commit
+      * [continuous-integration][]
 07. How can I make it easy for people to reproduce my results?
-    * Organize the project consistently: [nobles-rules][]
-    * Represent every analysis step textually: [recording-history][], [writing-shell-scripts][], [writing-analysis-programs][], [exporting-openrefine-history][], [using-make][]
-    * Make it easy to set up a development environment: [setting-up-for-development][]
-    * Record provenance in data: [tracking-provenance][]
+    * Organize the project consistently
+      * [nobles-rules][]
+    * Represent every analysis step textually
+      * [recording-history][]
+      * [writing-shell-scripts][]
+      * [writing-analysis-programs][]
+      * [exporting-openrefine-history][]
+      * [using-make][]
+    * Make it easy to set up a development environment
+      * [setting-up-for-development][]
+    * Record provenance in data
+      * [tracking-provenance][]
 08. How can I be more productive?
-    * Automate repetitive tasks: [writing-shell-scripts][]
-    * Only do as much calculation as necessary: [using-make][]
-    * Use efficient data structures: [associative-structures][]
-    * Find performance bottlenecks: [profiling][]
-    * Use more hardware: [task-farming][]
+    * Automate repetitive tasks
+      * [writing-shell-scripts][]
+    * Only do as much calculation as necessary
+      * [using-make][]
+    * Use efficient data structures
+      * [associative-structures][]
+    * Find performance bottlenecks
+      * [profiling][]
+    * Use more hardware
+      * [task-farming][]
 09. How can I make it easy for people to collaborate with me?
-    * Add assertions to the software to document invariants: [defensive-programming][]
-    * Provide simple re-runnable end-to-end test cases: [creating-integrity-tests][]
-    * Maintain a to-do list for each project: [issue-tracking][]
-    * Make the project's license explicit: [boilerplate][]
-    * Maintain a checklist of things to do before sharing a change: [commit-checklist][]
-    * Make it easy to set up a development environment: [setting-up-for-development][]
+    * Add assertions to the software to document invariants
+      * [defensive-programming][]
+    * Provide simple re-runnable end-to-end test cases
+      * [creating-integrity-tests][]
+    * Maintain a to-do list for each project
+      * [issue-tracking][]
+    * Make the project's license explicit
+      * [boilerplate][]
+    * Maintain a checklist of things to do before sharing a change
+      * [commit-checklist][]
+    * Make it easy to set up a development environment
+      * [setting-up-for-development][]
 10. How can I make it easy for my collaborators and I to co-author manuscripts?
-    * Keep the master copy of every manuscript on the web (version control or Google Docs): [version-control-intro][], [using-web-authoring][]
-    * Document publishing steps in machine-usable form (e.g., a script or Makefile): [writing-shell-scripts][]
+    * Keep the master copy of every manuscript on the web (version control or Google Docs)
+      * [version-control-intro][]
+      * [using-web-authoring][]
+    * Document publishing steps in machine-usable form (e.g., a script or Makefile)
+      * [writing-shell-scripts][]
 11. How can I make it easy for people to give me credit for my work?
-    * Make the preferred citation(s) for projects explicit: [boilerplate][]
-    * Get an ORCID: [getting-orcid][]
+    * Make the preferred citation(s) for projects explicit
+      * [boilerplate][]
+    * Get an ORCID
+      * [getting-orcid][]
 
 ## Key Insights
 
-* It's all just data, but data doesn't mean anything on its own
-* Models for computers, views for people
-* The computer doesn't understand what we want to do
-* Program by creating and composing abstractions
-* Software is just another kind of lab equipment
-* Better code is better than better hardware
-* The less we do, the more productive we are
-* We are smarter together
-* Data (and software) should be [findable, accessible, interoperable and reusable][fair-data]
-* Your most important collaborator is your future self
-* Favor convention over configuration
+* It's all just ones and zeroes, but computers don't know what bits mean.
+* Models are for computers, views are for people.
+* Build programs by creating and combining abstractions.
+* Treat software like just another kind of lab equipment.
+* Better code is better than better hardware.
+* The less we type, the more productive we are.
+* We are smarter together.
+* If you didn't record it, it didn't happen (or can't happen again).
+* It doesn't count if you don't share it.
+* Your most important collaborator is your future self.
+* Convention is better than configuration.
 
 ## Course Outline
 
@@ -158,6 +221,7 @@ FIXME: outline learning plan for each half day.
 [creating-functions]: path.html "Creating Functions"
 [creating-integrity-tests]: path.html "Creating Integrity Tests"
 [data-hygiene]: path.html "Data Hygiene"
+[documenting-requirements]: path.html "Documenting Software Requirements"
 [defensive-programming]: path.html "Defensive Programming"
 [exporting-openrefine-history]: path.html "Exporting OpenRefine History"
 [finding-software]: path.html "Finding Software"
