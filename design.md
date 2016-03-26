@@ -6,8 +6,11 @@ subtitle: Course Design
 
 This material is meant to be used in a two-week workshop
 similar to those run by [Software Carpentry][swc-website] and [Data Carpentry][dc-website].
-The outline below was developed using a slimmed-down variant of the "Understanding by Design" process.
-The main sections are:
+The outline below was developed using a slimmed-down variant of the "[Understanding by Design][ubd-overview]" process,
+and incorporates ideas from
+"[Software Carpentry: Lessons Learned][swc-lessons-learned]",
+"[Best Practices in Scientific Computing][best-practices]",
+and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
 
 ## Assumptions
 
@@ -29,8 +32,9 @@ The main sections are:
 
 ## Essential Questions
 
-These are reverse engineered from the Goals sections of
-"[Good Enough Practices in Scientific Computing][good-enough]".
+The main bullet points are the questions;
+their children are the answers,
+and the lowest-level points are links to elaborations of those answers.
 
 1. How can I avoid losing work?
    *   Prefer open text formats to proprietary non-text formats
@@ -44,43 +48,83 @@ These are reverse engineered from the Goals sections of
        *   [update-repository][]
 2. How can I make it easy for people to find and use my data?
    *   Store all raw data exactly as it arrived (but use common sense for large data)
+       *   [nobles-rules][]
+       *   [what-not-to-store][]
    *   Use semantically-meaningful path names
+       *   [choosing-good-path-names][]
    *   Store metadata with data as plain text
+       *   [metadata][]
    *   Submit data to a reputable DOI issuer
+       *   [getting-doi][]
 3. How can I make it easy for programs to use my data?
    *   Make every value atomic
+       *   [data-hygiene][]
    *   Give every record a unique key
+       *   [data-hygiene][]
+       *   [associative-structures][]
    *   Apply these same rules to metadata
+       *   [metadata][]
    *   Use path names that are easy to sort and to match with simple regular expressions
+       *   [choosing-good-path-names][]
 4. How can I make it easy for people to find and use my software?
    *   Make requirements/dependencies explicit (preferably in machine-usable form)
+       *   [documenting-requirements][]
    *   Use a publicly-hosted version control repository
+       *   [where-to-host-repository][]
    *   Submit software to a reputable DOI issuer
+       *   [getting-doi][]
    *   Include a README file explaining its scope (and giving a working contact address)
+       *   [boilerplate][]
 5. How can I make it easy for people to understand my software?
    *   Begin every program with an explanatory comment that includes an example of use
+       *   [programming-style][]
    *   Give values, functions, and classes meaningful names
+       *   [programming-style][]
    *   Break programs into short functions that take a small number of parameters and have no side effects
+       *   [creating-functions][]
+       *   [programming-style][]
    *   Avoid duplicating functionality within modules
+       *   [programming-style][]
    *   Use data structures with named parts
+       *   [associative-structures][]
    *   Re-use libraries rather than writing equivalents
+       *   [finding-software][]
+       *   [using-libraries][]
    *   Use configuration files and conditionals to control behavior rather than commenting and uncommenting
+       *   [conditionals][]
+       *   [program-configuration][]
+       *   [programming-style][]
 6. How can I make it easy for people to reproduce my results?
    *   Organize the project's contents according to [Noble's Rules][noble-rules]
+       *   [nobles-rules][]
    *   Represent every analysis step textually (complete with parameter values)
-   *   Record data normalization steps like other data processing steps
-   *   Document analysis steps in machine-usable form (e.g., a script or Makefile)
+       *   [recording-history][]
+       *   [writing-shell-scripts][]
+       *   [writing-analysis-programs][]
+       *   [exporting-openrefine-history][]
+       *   [using-make][]
 7. How can I make it easy for people to collaborate with me?
    *   Add assertions to the software to document invariants
+       *   [defensive-programming][]
    *   Provide simple re-runnable end-to-end test cases
+       *   [creating-integrity-tests][]
    *   Maintain a to-do list for each project
+       *   [issue-tracking][]
    *   Make the project's license explicit
+       *   [boilerplate][]
    *   Maintain a checklist of things to do before sharing a change
+       *   [commit-checklist][]
 8. How can I make it easy for my collaborators and I to co-author manuscripts?
    *   Keep the master copy of every manuscript on the web (version control or Google Docs)
+       *   [version-control-intro][]
+       *   [using-web-authoring][]
    *   Document publishing steps in machine-usable form (e.g., a script or Makefile)
+       *   [writing-shell-scripts][]
 9. How can I make it easy for people to give me credit for my work?
    *   Make the preferred citation(s) for projects explicit
+       *   [boilerplate][]
+   *   Get an ORCID
+       *    [getting-orcid][]
 
 ## Key Insights
 
@@ -384,12 +428,42 @@ Sub-directories in each project are organized according to Noble's rules:
    are included in the project folder (and kept under version control)
    just like tools used to do simulation or analysis.
 
-[good-enough]: http://github.com/swcarpentry/good-enough-practices-in-scientific-computing/
-[noble-rules]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424
+[best-practices]: http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745 "Best Practices in Scientific Computing"
+[dc-website]: http://datacarpentry.org "Data Carpentry website"
+[good-enough-practices]: http://github.com/swcarpentry/good-enough-practices-in-scientific-computing/ "Good Enough Practices in Scientific Computing"
+[noble-rules]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424 "A Quick Guide to Organizing Computational Biology Projects"
+[swc-lessons-learned]: http://f1000research.com/articles/3-62/v2 "Software Carpentry: Lessons Learned"
+[swc-website]: http://software-carpentry.org "Software Carpentry website"
+[ubd-overview]: http://www.grantwiggins.org/documents/UbDQuikvue1005.pdf "Overview of Understanding by Design & the Design Template"
 
-[what-is-csv]: path.html "CSV Format"
-[read-csv-files]: path.html "Reading CSV Files"
-[version-control-intro]: path.html "Introducing Version Control"
-[where-to-host-repository]: path.html "Repository Hosting Options"
 [add-to-repository]: path.html "Adding Files to a Repository"
+[associative-structures]: path.html "Associative Data Structures"
+[boilerplate]: path.html "Project Boilerplate"
+[choosing-good-path-names]: path.html "Choosing Good Path Names"
+[commit-checklist]: path.html "Creating a Commit Checklist"
+[conditionals]: path.html "Conditional Expressions"
+[creating-functions]: path.html "Creating Functions"
+[creating-integrity-tests]: path.html "Creating Integrity Tests"
+[data-hygiene]: path.html "Data Hygiene"
+[defensive-programming]: path.html "Defensive Programming"
+[exporting-openrefine-history]: path.html "Exporting OpenRefine History"
+[finding-software]: path.html "Finding Software"
+[getting-doi]: path.html "Using DOIs"
+[getting-orcid]: path.html "Using ORCIDs"
+[issue-tracking]: path.html "Issue Tracking"
+[metadata]: path.html "Storing Metadata"
+[nobles-rules]: path.html "Noble's Rules for Organizing Projects"
+[program-configuration]: path.html "Configuring Programs"
+[programming-style]: path.html "Programming Style"
+[read-csv-files]: path.html "Reading CSV Files"
+[recording-history]: path.html "Recording History"
 [update-repository]: path.html "Updating a Repository"
+[using-libraries]: path.html "Using Libraries"
+[using-make]: path.html "Using Make"
+[using-web-authoring]: path.html "Using Web-based Authoring Tools"
+[version-control-intro]: path.html "Introducing Version Control"
+[what-is-csv]: path.html "CSV Format"
+[what-not-to-store]: path.html "What Not to Put in Version Control"
+[where-to-host-repository]: path.html "Repository Hosting Options"
+[writing-analysis-programs]: path.html "Writing Analysis Programs"
+[writing-shell-scripts]: path.html "Writing Shell Scripts"
