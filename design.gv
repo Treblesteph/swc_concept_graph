@@ -1,10 +1,12 @@
-graph scb {
+digraph scb {
 	// Properties.
 	rankdir = "LR";
 	node [shape="box"];
 
-	// Questions and answers.
+	// Questions.
+	subgraph questions {
 	node [color="teal"];
+	rank = "same";
 	q_avoid_losing_work [label="How can I avoid losing work?"];
 	q_find_use_others_data [label="How can I find and use other people's data?"];
 	q_make_data_findable [label="How can I make it easy for people to find and use my data?"];
@@ -15,9 +17,12 @@ graph scb {
 	q_results_reproducible [label="How can I make it easy for people to reproduce my results?"];
 	q_improve_productivity [label="How can I be more productive?"];
 	q_make_collaboration_easy [label="How can I make it easy for people to collaborate with me?"];
+	}
 
-	// Answers and topics.
+	// Answers.
+	subgraph answers {
 	node [color="sienna"];
+	rank = "same";
 	a_add_assertions [label="Add assertions to the software to document invariants."];
 	a_add_human_work_to_repo [label="Put everything created by a human being into version control as soon as it's created."];
 	a_atomic_values [label="Make every value atomic."];
@@ -72,9 +77,12 @@ graph scb {
 	a_use_sortable_matchable_path_names [label="Use path names that are easy to sort and to match."];
 	a_write_readable_software [label="Write readable software."];
 	a_write_unit_tests [label="Write unit tests to specify and check behavior."];
+	}
 
 	// Topics.
+	subgraph topics {
 	node [color="goldenrod"];
+	rank = "same";
 	t_add_to_repository [label="Adding Files to a Repository"];
 	t_associative_structures [label="Associative Data Structures"];
 	t_boilerplate [label="Project Boilerplate"];
@@ -123,197 +131,206 @@ graph scb {
 	t_writing_shell_loops [label="Writing Loops in the Shell"];
 	t_writing_shell_scripts [label="Writing Shell Scripts"];
 	t_writing_unit_tests [label="Writing Unit Tests"];
+	}
 
 	// Questions to answers.
 
-	q_avoid_losing_work -- a_add_human_work_to_repo;
-	q_avoid_losing_work -- a_good_commit_comments;
-	q_avoid_losing_work -- a_prefer_open_text;
-	q_avoid_losing_work -- a_store_work_remote_repo;
+	q_avoid_losing_work:ne -> a_add_human_work_to_repo:w;
+	q_avoid_losing_work:e -> a_good_commit_comments:w;
+	q_avoid_losing_work:e -> a_prefer_open_text:w;
+	q_avoid_losing_work:se -> a_store_work_remote_repo:w;
 
-	q_make_data_findable -- a_clean_up_data;
-	q_make_data_findable -- a_data_doi;
-	q_make_data_findable -- a_dont_duplicate_large_data;
-	q_make_data_findable -- a_meaningful_path_names;
-	q_make_data_findable -- a_regular_spreadsheet_layout;
-	q_make_data_findable -- a_separate_models_from_views;
-	q_make_data_findable -- a_store_raw_data;
-	q_make_data_findable -- a_treat_metadata_like_data;
-	q_make_data_findable -- a_use_relational_database;
+	q_make_data_findable:ne -> a_clean_up_data:w;
+	q_make_data_findable:ne -> a_data_doi:w;
+	q_make_data_findable:ne -> a_meaningful_path_names:w;
+	q_make_data_findable:ne -> a_treat_metadata_like_data:w;
+	q_make_data_findable:e -> a_store_raw_data:w;
+	q_make_data_findable:se -> a_regular_spreadsheet_layout:w;
+	q_make_data_findable:se -> a_separate_models_from_views:w;
+	q_make_data_findable:se -> a_dont_duplicate_large_data:w;
+	q_make_data_findable:se -> a_use_relational_database:w;
 
-	q_make_data_usable_by_programs -- a_atomic_values;
-	q_make_data_usable_by_programs -- a_avoid_duplication;
-	q_make_data_usable_by_programs -- a_keys_for_records;
-	q_make_data_usable_by_programs -- a_treat_metadata_like_data;
-	q_make_data_usable_by_programs -- a_use_matchable_text;
-	q_make_data_usable_by_programs -- a_use_sortable_matchable_path_names;
+	q_make_data_usable_by_programs:ne -> a_atomic_values:w;
+	q_make_data_usable_by_programs:ne -> a_avoid_duplication:w;
+	q_make_data_usable_by_programs:e -> a_keys_for_records:w;
+	q_make_data_usable_by_programs:e -> a_treat_metadata_like_data:w;
+	q_make_data_usable_by_programs:se -> a_use_matchable_text:w;
+	q_make_data_usable_by_programs:se -> a_use_sortable_matchable_path_names:w;
 
-	q_make_software_findable_usable -- a_document_function;
-	q_make_software_findable_usable -- a_dont_duplicate_code;
-	q_make_software_findable_usable -- a_explicit_requirements;
-	q_make_software_findable_usable -- a_give_code_meaningful_names;
-	q_make_software_findable_usable -- a_include_readme;
-	q_make_software_findable_usable -- a_remove_unused_code;
-	q_make_software_findable_usable -- a_reuse_libraries;
-	q_make_software_findable_usable -- a_software_doi;
-	q_make_software_findable_usable -- a_store_work_remote_repo;
-	q_make_software_findable_usable -- a_use_associative_data_structures;
-	q_make_software_findable_usable -- a_use_config_files;
-	q_make_software_findable_usable -- a_use_functions;
+	q_make_software_findable_usable:ne -> a_document_function:w;
+	q_make_software_findable_usable:ne -> a_dont_duplicate_code:w;
+	q_make_software_findable_usable:ne -> a_explicit_requirements:w;
+	q_make_software_findable_usable:ne -> a_give_code_meaningful_names:w;
+	q_make_software_findable_usable:e -> a_include_readme:w;
+	q_make_software_findable_usable:e -> a_remove_unused_code:w;
+	q_make_software_findable_usable:e -> a_reuse_libraries:w;
+	q_make_software_findable_usable:e -> a_software_doi:w;
+	q_make_software_findable_usable:se -> a_store_work_remote_repo:w;
+	q_make_software_findable_usable:se -> a_use_associative_data_structures:w;
+	q_make_software_findable_usable:se -> a_use_config_files:w;
+	q_make_software_findable_usable:se -> a_use_functions:w;
 
-	q_results_correct -- a_add_assertions;
-	q_results_correct -- a_build_and_smoke_tests;
-	q_results_correct -- a_choose_visualization;
-	q_results_correct -- a_code_reviews;
-	q_results_correct -- a_run_precommit_checks;
-	q_results_correct -- a_write_readable_software;
-	q_results_correct -- a_write_unit_tests;
+	q_results_correct:ne -> a_choose_visualization:w;
+	q_results_correct:ne -> a_code_reviews:w;
+	q_results_correct:ne -> a_run_precommit_checks:w;
+	q_results_correct:e -> a_write_unit_tests:w;
+	q_results_correct:e -> a_write_readable_software:w;
+	q_results_correct:se -> a_add_assertions:w;
+	q_results_correct:se -> a_build_and_smoke_tests:w;
 
-	q_results_reproducible -- a_consistent_project_organization;
-	q_results_reproducible -- a_record_analysis_steps_textually;
-	q_results_reproducible -- a_record_data_provenance;
-	q_results_reproducible -- a_set_up_development;
+	q_results_reproducible:ne -> a_consistent_project_organization:w;
+	q_results_reproducible:e -> a_record_analysis_steps_textually:w;
+	q_results_reproducible:e -> a_record_data_provenance:w;
+	q_results_reproducible:se -> a_set_up_development:w;
 
-	q_improve_productivity -- a_automate_tasks;
-	q_improve_productivity -- a_eliminate_redundant_calculation;
-	q_improve_productivity -- a_have_computer_repeat_things;
-	q_improve_productivity -- a_profile_performance;
-	q_improve_productivity -- a_use_clusters;
-	q_improve_productivity -- a_use_efficient_data_structures;
+	q_improve_productivity:ne -> a_automate_tasks:w;
+	q_improve_productivity:ne -> a_eliminate_redundant_calculation:w;
+	q_improve_productivity:ne -> a_use_efficient_data_structures:w;
+	q_improve_productivity:e -> a_profile_performance:w;
+	q_improve_productivity:se -> a_have_computer_repeat_things:w;
+	q_improve_productivity:se -> a_use_clusters:w;
 
-	q_make_collaboration_easy -- a_add_assertions;
-	q_make_collaboration_easy -- a_build_and_smoke_tests;
-	q_make_collaboration_easy -- a_commit_checklist;
-	q_make_collaboration_easy -- a_get_orcid;
-	q_make_collaboration_easy -- a_master_manuscript_online;
-	q_make_collaboration_easy -- a_project_todo_list;
-	q_make_collaboration_easy -- a_record_publishing_steps;
-	q_make_collaboration_easy -- a_set_up_development;
-	q_make_collaboration_easy -- a_specify_citation;
-	q_make_collaboration_easy -- a_specify_license;
+	q_make_collaboration_easy:ne -> a_add_assertions:w;
+	q_make_collaboration_easy:ne -> a_build_and_smoke_tests:w;
+	q_make_collaboration_easy:ne -> a_commit_checklist:w;
+	q_make_collaboration_easy:e -> a_get_orcid:w;
+	q_make_collaboration_easy:e -> a_master_manuscript_online:w;
+	q_make_collaboration_easy:e -> a_project_todo_list:w;
+	q_make_collaboration_easy:e -> a_record_publishing_steps:w;
+	q_make_collaboration_easy:se -> a_set_up_development:w;
+	q_make_collaboration_easy:se -> a_specify_citation:w;
+	q_make_collaboration_easy:se -> a_specify_license:w;
 
 	// Answers to topics.
 
-	a_add_assertions -- t_defensive_programming;
+	a_add_assertions:e -> t_defensive_programming:w;
 
-	a_add_human_work_to_repo -- t_add_to_repository;
-	a_add_human_work_to_repo -- t_update_repository;
+	a_add_human_work_to_repo:e -> t_add_to_repository:w;
+	a_add_human_work_to_repo:e -> t_update_repository:w;
 
-	a_atomic_values -- t_data_hygiene;
+	a_atomic_values:e -> t_data_hygiene:w;
 
-	a_automate_tasks -- t_writing_shell_scripts;
+	a_automate_tasks:e -> t_writing_shell_scripts:w;
 
-	a_avoid_duplication -- t_programming_style;
+	a_avoid_duplication:e -> t_programming_style:w;
 
-	a_build_and_smoke_tests -- t_creating_integrity_tests;
+	a_build_and_smoke_tests:e -> t_creating_integrity_tests:w;
 
-	a_choose_visualization -- t_choosing_visualization;
+	a_choose_visualization:e -> t_choosing_visualization:w;
 
-	a_clean_up_data -- t_data_hygiene;
+	a_clean_up_data:e -> t_data_hygiene:w;
 
-	a_code_reviews -- t_code_reviews;
+	a_code_reviews:e -> t_code_reviews:w;
 
-	a_commit_checklist -- t_commit_checklist;
+	a_commit_checklist:e -> t_commit_checklist:w;
 
-	a_consistent_project_organization -- t_nobles_rules;
+	a_consistent_project_organization:e -> t_nobles_rules:w;
 
-	a_data_doi -- t_getting_doi;
+	a_data_doi:e -> t_getting_doi:w;
 
-	a_document_function -- t_programming_style;
+	a_document_function:e -> t_programming_style:w;
 
-	a_dont_duplicate_code -- t_programming_style;
+	a_dont_duplicate_code:e -> t_programming_style:w;
 
-	a_dont_duplicate_large_data -- t_what_not_to_store;
+	a_dont_duplicate_large_data:e -> t_what_not_to_store:w;
 
-	a_eliminate_redundant_calculation -- t_using_make;
+	a_eliminate_redundant_calculation:e -> t_using_make:w;
 
-	a_explicit_requirements -- t_documenting_requirements;
+	a_explicit_requirements:e -> t_documenting_requirements:w;
 
-	a_get_orcid -- t_getting_orcid;
+	a_get_orcid:e -> t_getting_orcid:w;
 
-	a_give_code_meaningful_names -- t_programming_style;
+	a_give_code_meaningful_names:e -> t_programming_style:w;
 
-	a_good_commit_comments -- t_good_commit_comments;
+	a_good_commit_comments:e -> t_good_commit_comments:w;
 
-	a_have_computer_repeat_things -- t_writing_python_loops;
-	a_have_computer_repeat_things -- t_writing_shell_loops;
+	a_have_computer_repeat_things:e -> t_writing_python_loops:w;
+	a_have_computer_repeat_things:e -> t_writing_shell_loops:w;
 
-	a_include_readme -- t_boilerplate;
+	a_include_readme:e -> t_boilerplate:w;
 
-	a_keys_for_records -- t_associative_structures;
-	a_keys_for_records -- t_data_hygiene;
+	a_keys_for_records:e -> t_associative_structures:w;
+	a_keys_for_records:e -> t_data_hygiene:w;
 
-	a_master_manuscript_online -- t_using_web_authoring;
-	a_master_manuscript_online -- t_version_control_intro;
+	a_master_manuscript_online:e -> t_using_web_authoring:w;
+	a_master_manuscript_online:e -> t_version_control_intro:w;
 
-	a_meaningful_path_names -- t_choosing_good_path_names;
+	a_meaningful_path_names:e -> t_choosing_good_path_names:w;
 
-	a_prefer_open_text -- t_csv_intro;
-	a_prefer_open_text -- t_read_csv;
+	a_prefer_open_text:e -> t_csv_intro:w;
+	a_prefer_open_text:e -> t_read_csv:w;
 
-	a_profile_performance -- t_profiling;
+	a_profile_performance:e -> t_profiling:w;
 
-	a_project_todo_list -- t_issue_tracking;
+	a_project_todo_list:e -> t_issue_tracking:w;
 
-	a_record_analysis_steps_textually -- t_exporting_openrefine_history;
-	a_record_analysis_steps_textually -- t_recording_history;
-	a_record_analysis_steps_textually -- t_using_make;
-	a_record_analysis_steps_textually -- t_writing_analysis_programs;
-	a_record_analysis_steps_textually -- t_writing_shell_scripts;
+	a_record_analysis_steps_textually:ne -> t_exporting_openrefine_history:w;
+	a_record_analysis_steps_textually:ne -> t_writing_shell_scripts:w;
+	a_record_analysis_steps_textually:e -> t_writing_analysis_programs:w;
+	a_record_analysis_steps_textually:se -> t_recording_history:w;
+	a_record_analysis_steps_textually:se -> t_using_make:w;
 
-	a_record_data_provenance -- t_tracking_provenance;
+	a_record_data_provenance:e -> t_tracking_provenance:w;
 
-	a_record_publishing_steps -- t_using_make;
-	a_record_publishing_steps -- t_writing_shell_scripts;
+	a_record_publishing_steps:e -> t_using_make:w;
+	a_record_publishing_steps:e -> t_writing_shell_scripts:w;
 
-	a_regular_spreadsheet_layout -- t_formatting_spreadsheets;
+	a_regular_spreadsheet_layout:e -> t_formatting_spreadsheets:w;
 
-	a_remove_unused_code -- t_coverage;
+	a_remove_unused_code:e -> t_coverage:w;
 
-	a_represent_each_fact_once -- t_data_hygiene;
+	a_represent_each_fact_once:e -> t_data_hygiene:w;
 
-	a_reuse_libraries -- t_finding_software;
-	a_reuse_libraries -- t_using_libraries;
+	a_reuse_libraries:e -> t_finding_software:w;
+	a_reuse_libraries:e -> t_using_libraries:w;
 
-	a_run_precommit_checks -- t_continuous_integration;
+	a_run_precommit_checks:e -> t_continuous_integration:w;
 
-	a_separate_models_from_views -- t_models_vs_views;
+	a_separate_models_from_views:e -> t_models_vs_views:w;
 
-	a_set_up_development -- t_setting_up_for_development;
+	a_set_up_development:e -> t_setting_up_for_development:w;
 
-	a_software_doi -- t_getting_doi;
+	a_software_doi:e -> t_getting_doi:w;
 
-	a_specify_citation -- t_boilerplate;
+	a_specify_citation:e -> t_boilerplate:w;
 
-	a_specify_license -- t_boilerplate;
+	a_specify_license:e -> t_boilerplate:w;
 
-	a_store_raw_data -- t_nobles_rules;
+	a_store_raw_data:e -> t_nobles_rules:w;
 
-	a_store_work_remote_repo -- t_choosing_repository_host;
-	a_store_work_remote_repo -- t_version_control_intro;
+	a_store_work_remote_repo:e -> t_choosing_repository_host:w;
+	a_store_work_remote_repo:e -> t_version_control_intro:w;
 
-	a_treat_metadata_like_data -- t_metadata;
+	a_treat_metadata_like_data:e -> t_metadata:w;
 
-	a_use_associative_data_structures -- t_associative_structures;
+	a_use_associative_data_structures:e -> t_associative_structures:w;
 
-	a_use_clusters -- t_task_farming;
+	a_use_clusters:e -> t_task_farming:w;
 
-	a_use_config_files -- t_conditionals;
-	a_use_config_files -- t_program_configuration;
-	a_use_config_files -- t_programming_style;
+	a_use_config_files:e -> t_conditionals:w;
+	a_use_config_files:e -> t_program_configuration:w;
+	a_use_config_files:e -> t_programming_style:w;
 
-	a_use_efficient_data_structures -- t_associative_structures;
+	a_use_efficient_data_structures:e -> t_associative_structures:w;
 
-	a_use_functions -- t_creating_functions;
-	a_use_functions -- t_programming_style;
+	a_use_functions:e -> t_creating_functions:w;
+	a_use_functions:e -> t_programming_style:w;
 
-	a_use_matchable_text -- t_using_regular_expressions;
+	a_use_matchable_text:e -> t_using_regular_expressions:w;
 
-	a_use_relational_database -- t_using_sql;
+	a_use_relational_database:e -> t_using_sql:w;
 
-	a_use_sortable_matchable_path_names -- t_choosing_good_path_names;
+	a_use_sortable_matchable_path_names:e -> t_choosing_good_path_names:w;
 
-	a_write_readable_software -- t_programming_style;
+	a_write_readable_software:e -> t_programming_style:w;
 
-	a_write_unit_tests -- t_writing_unit_tests;
+	a_write_unit_tests:e -> t_writing_unit_tests:w;
+
+	// Topics to topics.
+
+	t_add_to_repository:e -> t_version_control_intro:e;
+	t_update_repository:e -> t_add_to_repository:e;
+	t_good_commit_comments:e -> t_add_to_repository:e;
+
+	t_read_csv:e -> t_csv_intro:e;
 }
