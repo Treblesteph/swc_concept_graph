@@ -1,3 +1,4 @@
-# scb
+# long-form
 
-A book aimed at the same audience as Software Carpentry.
+A two-week long-form course based on [Software Carpentry](http://software-carpentry.org)
+and [Data Carpentry](http://datacarpentry.org).
