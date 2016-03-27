@@ -44,7 +44,11 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [update-repository][]
     * Write good commit comments
       * [writing-good-commit-comments][]
-02. How can I make it easy for people to find and use my data?
+02. How can I find and use other people's data?
+    * FIXME
+03. How can I make it easy for people to find and use my data?
+    * Use regular layout for spreadsheets
+      * [formatting-spreadsheets][]
     * Separate models from views
       * [models-vs-views][]
     * Store raw data exactly as it arrived
@@ -57,7 +61,11 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [metadata][]
     * Submit data to a reputable DOI issuer
       * [getting-doi][]
-03. How can I make it easy for programs to use my data?
+    * Store data in a relational database
+      * [using-sql][]
+    * Clean up data
+      * [data-hygiene][]
+04. How can I make it easy for programs to use my data?
     * Make every value atomic
       * [data-hygiene][]
     * Give every record a unique key
@@ -67,9 +75,13 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [data-hygiene][]
     * Apply these same rules to metadata
       * [metadata][]
-    * Use path names that are easy to sort and to match with simple regular expressions
+    * Use path names that are easy to sort and to match
       * [choosing-good-path-names][]
-04. How can I make it easy for people to find and use my software?
+    * Use text values that are easy to match with regular expressions
+      * [using-regular-expressions][]
+05. How can I find and use other people's software?
+    * FIXME
+06. How can I make it easy for people to find and use my software?
     * Make requirements/dependencies explicit (preferably in machine-usable form)
       * [documenting-requirements][]
     * Use a publicly-hosted version control repository
@@ -78,7 +90,6 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [getting-doi][]
     * Include a README file explaining its scope (and giving a working contact address)
       * [boilerplate][]
-05. How can I make it easy for people to understand my software?
     * Begin every program with an explanatory comment that includes an example of use
       * [programming-style][]
     * Give values, functions, and classes meaningful names
@@ -99,7 +110,7 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [programming-style][]
     * Remove unused code
       * [coverage][]
-06. How can I tell if my results are correct?
+07. How can I tell if my results are correct?
     * Add assertions to the software to document invariants
       * [defensive-programming][]
     * Provide simple re-runnable end-to-end test cases
@@ -108,7 +119,13 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [writing-unit-tests][]
     * Run tests automatically before each commit
       * [continuous-integration][]
-07. How can I make it easy for people to reproduce my results?
+    * Choose an appropriate visualization
+      * [choosing-visualization][]
+    * Write readable software
+      * [programming-style][]
+    * Do code reviews
+      * [code-reviews][]
+08. How can I make it easy for people to reproduce my results?
     * Organize the project consistently
       * [nobles-rules][]
     * Represent every analysis step textually
@@ -121,9 +138,12 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [setting-up-for-development][]
     * Record provenance in data
       * [tracking-provenance][]
-08. How can I be more productive?
+09. How can I be more productive?
     * Automate repetitive tasks
       * [writing-shell-scripts][]
+    * Have the computer repeat things
+      * [writing-shell-loops][]
+      * [writing-python-loops][]
     * Only do as much calculation as necessary
       * [using-make][]
     * Use efficient data structures
@@ -132,7 +152,7 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [profiling][]
     * Use more hardware
       * [task-farming][]
-09. How can I make it easy for people to collaborate with me?
+10. How can I make it easy for people to collaborate with me?
     * Add assertions to the software to document invariants
       * [defensive-programming][]
     * Provide simple re-runnable end-to-end test cases
@@ -145,17 +165,16 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
       * [commit-checklist][]
     * Make it easy to set up a development environment
       * [setting-up-for-development][]
-10. How can I make it easy for my collaborators and I to co-author manuscripts?
-    * Keep the master copy of every manuscript on the web (version control or Google Docs)
-      * [version-control-intro][]
-      * [using-web-authoring][]
-    * Document publishing steps in machine-usable form (e.g., a script or Makefile)
-      * [writing-shell-scripts][]
-11. How can I make it easy for people to give me credit for my work?
     * Make the preferred citation(s) for projects explicit
       * [boilerplate][]
     * Get an ORCID
       * [getting-orcid][]
+    * Keep the master copy of every manuscript on the web
+      * [version-control-intro][]
+      * [using-web-authoring][]
+    * Record publishing steps in machine-usable form
+      * [writing-shell-scripts][]
+      * [using-make][]
 
 ## Key Insights
 
@@ -173,7 +192,7 @@ and "[Good Enough Practices in Scientific Computing][good-enough-practices]".
 
 ## Course Outline
 
-| **Week** | **Day** | **Session** | **Subject**                        | *Slug*               |
+| **Week** | **Day** | **Session** | **Subject**                          | *Slug*                 |
 | 1        | Mon     | a.m.        | Spreadsheets / OpenRefine            | tabular                |
 |          |         | p.m.        | SQL                                  | sql                    |
 | 1        | Mon     | a.m.        | Unix Shell 1                         | shell_01               |
@@ -214,6 +233,8 @@ FIXME: outline learning plan for each half day.
 [associative-structures]: path.html "Associative Data Structures"
 [boilerplate]: path.html "Project Boilerplate"
 [choosing-good-path-names]: path.html "Choosing Good Path Names"
+[choosing-visualization]: path.html "Choosing a Good Visualization"
+[code-reviews]: path.html "Doing Code Reviews"
 [commit-checklist]: path.html "Creating a Commit Checklist"
 [conditionals]: path.html "Conditional Expressions"
 [continuous-integration]: path.html "Continuous Integration"
@@ -225,6 +246,7 @@ FIXME: outline learning plan for each half day.
 [defensive-programming]: path.html "Defensive Programming"
 [exporting-openrefine-history]: path.html "Exporting OpenRefine History"
 [finding-software]: path.html "Finding Software"
+[formatting-spreadsheets]: path.html "Formatting Spreadsheets"
 [getting-doi]: path.html "Using DOIs"
 [getting-orcid]: path.html "Using ORCIDs"
 [issue-tracking]: path.html "Issue Tracking"
@@ -242,6 +264,8 @@ FIXME: outline learning plan for each half day.
 [update-repository]: path.html "Updating a Repository"
 [using-libraries]: path.html "Using Libraries"
 [using-make]: path.html "Using Make"
+[using-regular-expressions]: path.html "Using Regular Expressions"
+[using-sql]: path.html "Using a Relational Database"
 [using-web-authoring]: path.html "Using Web-based Authoring Tools"
 [version-control-intro]: path.html "Introducing Version Control"
 [what-is-csv]: path.html "CSV Format"
@@ -249,5 +273,7 @@ FIXME: outline learning plan for each half day.
 [where-to-host-repository]: path.html "Repository Hosting Options"
 [writing-analysis-programs]: path.html "Writing Analysis Programs"
 [writing-good-commit-comments]: path.html "Writing Good Commit Comments"
+[writing-shell-loops]: path.html "Writing Loops in the Shell"
+[writing-python-loops]: path.html "Writing Loops in Python"
 [writing-shell-scripts]: path.html "Writing Shell Scripts"
 [writing-unit-tests]: path.html "Writing Unit Tests"

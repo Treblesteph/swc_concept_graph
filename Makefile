@@ -7,6 +7,7 @@
 #----------------------------------------
 
 MAKEFILES=Makefile $(wildcard *.mk)
+DOT=dot
 JEKYLL=jekyll
 
 #----------------------------------------
@@ -26,6 +27,10 @@ serve :
 ## site       : build files but do not run a server.
 site :
 	${JEKYLL} build --config _config.yml
+
+## graphical  : build dependency diagram.
+graphical :
+	${DOT} -Tsvg design.gv > design.svg
 
 ## clean      : clean up junk files.
 clean :
