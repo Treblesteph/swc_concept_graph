@@ -80,18 +80,19 @@ digraph scb {
 		a_use_functions [label="Break programs into short, self-contained functions."];
 		a_use_matchable_text [label="Use text values that are easy to match with regular expressions."];
 		a_use_relational_database [label="Store data in a relational database."];
-		a_use_sortable_matchable_path_names [label="Use path names that are easy to sort and to match."];
+		a_sortable_matchable_path_names [label="Use path names that are easy to sort and to match."];
 		a_write_readable_software [label="Write readable software."];
 		a_write_unit_tests [label="Write unit tests to specify and check behavior."];
 		a_use_package_manager [label="Use a package manager."];
 		a_search_answer_sites [label="Search question-and-answer sites."];
 		a_search_data_repositories [label="Search data repositories."];
+		a_debugging [label="Debug programs."];
 	}
 
 	// ----------------------------------------
-	// Topics 1: immediate skills.
+	// Topics.
 	// ----------------------------------------
-	subgraph topics_1 {
+	subgraph topics {
 		node [color="goldenrod"];
 		rank = "same";
 		t_add_to_repository [label="Adding Files to a Repository"];
@@ -105,7 +106,7 @@ digraph scb {
 		t_conditionals [label="Conditional Expressions"];
 		t_continuous_integration [label="Continuous Integration"];
 		t_coverage [label="Coverage Analysis"];
-		t_creating_functions [label="Creating Functions"];
+		t_writing_functions [label="Writing Functions"];
 		t_creating_integrity_tests [label="Creating Integrity Tests"];
 		t_csv_intro [label="Introducing CSV"];
 		t_data_hygiene [label="Data Hygiene"];
@@ -144,26 +145,24 @@ digraph scb {
 		t_writing_unit_tests [label="Writing Unit Tests"];
 		t_search_online [label="Searching Online"];
 		t_use_package_manager [label="Using a Package Manager"];
-	}
-
-	// ----------------------------------------
-	// Topics 2: prerequisite skills.
-	// ----------------------------------------
-	subgraph topics_2 {
-		node [color="olive"];
-		rank = "same";
-
 		t_navigating_file_system [label="Navigating the File System"];
 		t_managing_files [label="Creating, Deleting, and Managing Files"];
 		t_using_editor [label="Using a Plain Text Editor"];
 		t_filesystem_layout [label="How the Filesystem is Laid Out"];
 		t_installing_software [label="Installing Software"];
 		t_environment_variables [label="Environment Variables"];
-
 		t_creating_repository [label="Creating a Repository"];
 		t_reviewing_version_history [label="Reviewing Version History"]; //-
 		t_merging_changes [label="Merging Changes"]; //-
 		t_using_branches [label="Using Branches"];
+		t_filename_extensions [label="Filename Extensions"];
+		t_finding_files [label="Finding Files"];
+		t_introducing_openrefine [label="Introducing OpenRefine"];
+		t_using_openrefine [label="Using OpenRefine"];
+		t_call_stack [label="Understanding The Call Stack"];
+		t_trace_execution [label="Tracing Program Execution"];
+		t_logging [label="Logging Programing Execution"];
+		t_variable_scope [label="Variable Scope"];
 	}
 
 	// ----------------------------------------
@@ -193,7 +192,7 @@ digraph scb {
 	q_make_data_usable_by_programs:e -> a_atomic_values:w;
 	q_make_data_usable_by_programs:e -> a_use_matchable_text:w;
 	q_make_data_usable_by_programs:se -> a_treat_metadata_like_data:w;
-	q_make_data_usable_by_programs:se -> a_use_sortable_matchable_path_names:w;
+	q_make_data_usable_by_programs:se -> a_sortable_matchable_path_names:w;
 
 	q_find_use_others_software:ne -> a_code_reviews:w;
 	q_find_use_others_software:e -> a_use_package_manager:w;
@@ -220,6 +219,7 @@ digraph scb {
 	q_results_correct:e -> a_write_unit_tests:w;
 	q_results_correct:se -> a_write_readable_software:w;
 	q_results_correct:se -> a_code_reviews:w;
+	q_results_correct:se -> a_debugging:w;
 
 	q_results_reproducible:ne -> a_set_up_development:w;
 	q_results_reproducible:e -> a_record_data_provenance:w;
@@ -264,6 +264,7 @@ digraph scb {
 	a_choose_visualization:e -> t_choosing_visualization:w;
 
 	a_clean_up_data:e -> t_data_hygiene:w;
+	a_clean_up_data:e -> t_introducing_openrefine:w;
 
 	a_code_reviews:e -> t_code_reviews:w;
 
@@ -358,14 +359,14 @@ digraph scb {
 
 	a_use_efficient_data_structures:e -> t_associative_structures:w;
 
-	a_use_functions:e -> t_creating_functions:w;
+	a_use_functions:e -> t_writing_functions:w;
 	a_use_functions:e -> t_programming_style:w;
 
 	a_use_matchable_text:e -> t_using_regular_expressions:w;
 
 	a_use_relational_database:e -> t_using_sql:w;
 
-	a_use_sortable_matchable_path_names:e -> t_choosing_good_path_names:w;
+	a_sortable_matchable_path_names:e -> t_choosing_good_path_names:w;
 
 	a_write_readable_software:e -> t_programming_style:w;
 
@@ -375,6 +376,10 @@ digraph scb {
 	a_search_data_repositories:e -> t_search_online:w;
 
 	a_use_package_manager:e -> t_use_package_manager:w;
+
+	a_debugging:e -> t_writing_unit_tests:w;
+	a_debugging:e -> t_trace_execution:w;
+	a_debugging:e -> t_logging:w;
 
 	// ----------------------------------------
 	// Topics to topics.
@@ -386,18 +391,34 @@ digraph scb {
 
 	t_read_csv:e -> t_csv_intro:e;
 
-	t_writing_shell_scripts:e -> t_navigating_file_system:w;
-	t_writing_shell_scripts:e -> t_managing_files:w;
-	t_writing_shell_scripts:e -> t_using_editor:w;
+	t_writing_shell_scripts:e -> t_navigating_file_system:e;
+	t_writing_shell_scripts:e -> t_managing_files:e;
+	t_writing_shell_scripts:e -> t_using_editor:e;
 	t_managing_files:e -> t_using_editor:e;
-	t_use_package_manager:e -> t_filesystem_layout:w;
-	t_use_package_manager:e -> t_installing_software:w;
+	t_use_package_manager:e -> t_filesystem_layout:e;
+	t_use_package_manager:e -> t_installing_software:e;
 	t_installing_software:e -> t_environment_variables:e;
-	t_program_configuration:e -> t_environment_variables:w;
+	t_program_configuration:e -> t_environment_variables:e;
 
-	t_add_to_repository:e -> t_creating_repository:w;
-	t_creating_repository:w -> t_version_control_intro:e;
-	t_code_reviews:e -> t_reviewing_version_history:w;
-	t_code_reviews:e -> t_merging_changes:w;
-	t_code_reviews:e -> t_using_branches:w;
+	t_choosing_good_path_names:e -> t_filename_extensions:e;
+	t_choosing_good_path_names:e -> t_finding_files:e;
+	t_finding_files:e -> t_filesystem_layout:e;
+
+	t_add_to_repository:e -> t_creating_repository:e;
+	t_creating_repository:e -> t_version_control_intro:e;
+	t_code_reviews:e -> t_reviewing_version_history:e;
+	t_code_reviews:e -> t_merging_changes:e;
+	t_code_reviews:e -> t_using_branches:e;
+
+	t_exporting_openrefine_history:e -> t_introducing_openrefine:e;
+	t_using_openrefine:e -> t_introducing_openrefine:e;
+	t_using_openrefine:e -> t_using_regular_expressions:e;
+
+	t_trace_execution:e -> t_logging:e;
+	t_trace_execution:e -> t_call_stack:e;
+
+	t_call_stack:e -> t_variable_scope:e;
+	t_writing_functions:e -> t_variable_scope:e;
+
+	t_continuous_integration:e -> t_commit_checklist:e;
 }
