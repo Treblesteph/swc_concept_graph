@@ -152,6 +152,14 @@ digraph scb {
 	subgraph topics_2 {
 		node [color="olive"];
 		rank = "same";
+
+		t_navigating_file_system [label="Navigating the File System"];
+		t_managing_files [label="Creating, Deleting, and Managing Files"];
+		t_using_editor [label="Using a Plain Text Editor"];
+		t_filesystem_layout [label="How the Filesystem is Laid Out"];
+		t_installing_software [label="Installing Software"];
+		t_environment_variables [label="Environment Variables"];
+
 		t_creating_repository [label="Creating a Repository"];
 		t_reviewing_version_history [label="Reviewing Version History"]; //-
 		t_merging_changes [label="Merging Changes"]; //-
@@ -377,6 +385,15 @@ digraph scb {
 	t_good_commit_comments:e -> t_add_to_repository:e;
 
 	t_read_csv:e -> t_csv_intro:e;
+
+	t_writing_shell_scripts:e -> t_navigating_file_system:w;
+	t_writing_shell_scripts:e -> t_managing_files:w;
+	t_writing_shell_scripts:e -> t_using_editor:w;
+	t_managing_files:e -> t_using_editor:e;
+	t_use_package_manager:e -> t_filesystem_layout:w;
+	t_use_package_manager:e -> t_installing_software:w;
+	t_installing_software:e -> t_environment_variables:e;
+	t_program_configuration:e -> t_environment_variables:w;
 
 	t_add_to_repository:e -> t_creating_repository:w;
 	t_creating_repository:w -> t_version_control_intro:e;
