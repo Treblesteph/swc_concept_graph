@@ -1,3 +1,4 @@
+// Where's open?
 digraph scb {
 	// Properties.
 	rankdir = "LR";
@@ -88,9 +89,9 @@ digraph scb {
 	}
 
 	// ----------------------------------------
-	// Topics.
+	// Topics 1: immediate skills.
 	// ----------------------------------------
-	subgraph topics {
+	subgraph topics_1 {
 		node [color="goldenrod"];
 		rank = "same";
 		t_add_to_repository [label="Adding Files to a Repository"];
@@ -143,6 +144,18 @@ digraph scb {
 		t_writing_unit_tests [label="Writing Unit Tests"];
 		t_search_online [label="Searching Online"];
 		t_use_package_manager [label="Using a Package Manager"];
+	}
+
+	// ----------------------------------------
+	// Topics 2: prerequisite skills.
+	// ----------------------------------------
+	subgraph topics_2 {
+		node [color="olive"];
+		rank = "same";
+		t_creating_repository [label="Creating a Repository"];
+		t_reviewing_version_history [label="Reviewing Version History"]; //-
+		t_merging_changes [label="Merging Changes"]; //-
+		t_using_branches [label="Using Branches"];
 	}
 
 	// ----------------------------------------
@@ -364,4 +377,10 @@ digraph scb {
 	t_good_commit_comments:e -> t_add_to_repository:e;
 
 	t_read_csv:e -> t_csv_intro:e;
+
+	t_add_to_repository:e -> t_creating_repository:w;
+	t_creating_repository:w -> t_version_control_intro:e;
+	t_code_reviews:e -> t_reviewing_version_history:w;
+	t_code_reviews:e -> t_merging_changes:w;
+	t_code_reviews:e -> t_using_branches:w;
 }
