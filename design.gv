@@ -102,7 +102,7 @@ digraph scb {
 		t_python_dictionaries [label="Python Dictionaries", fillcolor="honeydew", style="filled"];
 		t_boilerplate_citation [label="Specifying Citations", fillcolor="honeydew", style="filled"];
 		t_boilerplate_license [label="Specifying a License"];
-		t_boilerplate_readme [label="Specifying Project Setup"];
+		t_boilerplate_readme [label="Writing a README File"];
 		t_boolean_operators [label="Boolean Operators"];
 		t_call_stack [label="Understanding The Call Stack", fillcolor="honeydew", style="filled"];
 		t_choosing_good_path_names [label="Choosing Good Path Names", fillcolor="honeydew", style="filled"];
@@ -297,6 +297,7 @@ digraph scb {
 	a_have_computer_repeat_things:e -> t_writing_python_loops:w;
 	a_have_computer_repeat_things:e -> t_writing_shell_loops:w;
 	a_include_readme:e -> t_boilerplate_readme:w;
+	a_include_readme:e -> t_documenting_requirements:w;
 	a_keys_for_records:e -> t_python_dictionaries:w;
 	a_keys_for_records:e -> t_data_hygiene:w;
 	a_master_manuscript_online:e -> t_using_web_authoring:w;
@@ -333,6 +334,7 @@ digraph scb {
 	a_specify_citation:e -> t_boilerplate_citation:w;
 	a_specify_license:e -> t_boilerplate_license:w;
 	a_store_raw_data:e -> t_nobles_rules:w;
+	a_store_raw_data:e -> t_tracking_provenance:w;
 	a_store_work_remote_repo:e -> t_choosing_repository_host:w;
 	a_store_work_remote_repo:e -> t_ignoring_files:w;
 	a_store_work_remote_repo:e -> t_version_control_intro:w;
