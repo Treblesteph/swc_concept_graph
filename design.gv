@@ -36,6 +36,7 @@ digraph scb {
 		a_avoid_duplication [label="Avoid duplicating functionality within modules."];
 		a_build_and_smoke_tests [label="Provide simple re-runnable end-to-end test cases."];
 		a_build_tools [label="Build tools."];
+		a_choose_primary_communication_channel [label="Choose a primary communication channel."];
 		a_choose_visualization [label="Choose an appropriate visualization."];
 		a_clean_up_data [label="Clean up data."];
 		a_code_reviews [label="Do code reviews."];
@@ -48,6 +49,7 @@ digraph scb {
 		a_dont_duplicate_large_data [label="Don't duplicate large data."];
 		a_eliminate_redundant_calculation [label="Only do as much calculation as necessary."];
 		a_explicit_requirements [label="Make requirements/dependencies explicit."];
+		a_foster_welcoming_environment [label="Foster a welcoming environment."];
 		a_get_orcid [label="Get an ORCID."];
 		a_give_code_meaningful_names [label="Give values, functions, and classes meaningful names."];
 		a_good_commit_comments [label="Write good commit comments."];
@@ -100,7 +102,7 @@ digraph scb {
 		rank = "same";
 		t_add_to_repository [label="Adding Files to a Repository"];
 		t_aggregating_data [label="Aggregating Data"];
-		t_python_dictionaries [label="Python Dictionaries", fillcolor="honeydew", style="filled"];
+		t_blogging [label="Publishing a Blog", fillcolor="honeydew", style="filled"];
 		t_boilerplate_citation [label="Specifying Citations", fillcolor="honeydew", style="filled"];
 		t_boilerplate_license [label="Specifying a License"];
 		t_boilerplate_readme [label="Writing a README File"];
@@ -109,6 +111,7 @@ digraph scb {
 		t_choosing_good_path_names [label="Choosing Good Path Names", fillcolor="honeydew", style="filled"];
 		t_choosing_repository_host [label="Where to Host a Repository"];
 		t_choosing_visualization [label="Choosing a Good Visualization", fillcolor="honeydew", style="filled"];
+		t_code_of_conduct [label="Creating a Code of Conduct"];
 		t_code_reviews [label="Doing Code Reviews", fillcolor="honeydew", style="filled"];
 		t_commit_checklist [label="Creating a Commit Checklist", fillcolor="honeydew", style="filled"];
 		t_computer_architecture [label="Computer Architecture", fillcolor="honeydew", style="filled"];
@@ -136,10 +139,12 @@ digraph scb {
 		t_getting_orcid [label="Using ORCIDs", fillcolor="honeydew", style="filled"];
 		t_good_commit_comments [label="Writing Good Commit Comments", fillcolor="honeydew", style="filled"];
 		t_handling_missing_data [label="Handling Missing Data"];
+		t_identify_starting_points [label="Identify Starting Points"];
 		t_ignoring_files [label="Ignoring Files"];
 		t_installing_software [label="Installing Software", fillcolor="honeydew", style="filled"];
 		t_introducing_openrefine [label="Introducing OpenRefine", fillcolor="honeydew", style="filled"];
 		t_introducing_relational_databases [label="Introducing Relational Databases"];
+		t_introducing_version_control [label="Introducing Version Control"];
 		t_issue_tracking [label="Issue Tracking", fillcolor="honeydew", style="filled"];
 		t_joining_data [label="Combining Data Using Join"];
 		t_logging [label="Logging Program Execution", fillcolor="honeydew", style="filled"];
@@ -155,6 +160,7 @@ digraph scb {
 		t_program_configuration [label="Configuring Programs", fillcolor="honeydew", style="filled"];
 		t_programming_databases [label="Programming Databases"];
 		t_programming_style [label="Programming Style", fillcolor="honeydew", style="filled"];
+		t_python_dictionaries [label="Python Dictionaries", fillcolor="honeydew", style="filled"];
 		t_python_lists [label="Lists in Python"];
 		t_read_csv [label="Reading CSV Files"];
 		t_reading_error_messages [label="Reading Error Messages"];
@@ -182,7 +188,6 @@ digraph scb {
 		t_using_web_authoring [label="Using Web-based Authoring Tools", fillcolor="honeydew", style="filled"];
 		t_variable_scope [label="Variable Scope"];
 		t_variables_assignment [label="Variables and Assignment"];
-		t_introducing_version_control [label="Introducing Version Control"];
 		t_what_not_to_store [label="What Not to Put in Version Control"];
 		t_writing_functions [label="Writing Functions"];
 		t_writing_programs [label="Writing Programs"];
@@ -215,7 +220,9 @@ digraph scb {
 	q_improve_productivity:e -> a_use_more_hardware:w;
 	q_make_collaboration_easy:e -> a_add_assertions:w;
 	q_make_collaboration_easy:e -> a_build_and_smoke_tests:w;
+	q_make_collaboration_easy:e -> a_choose_primary_communication_channel:w;
 	q_make_collaboration_easy:e -> a_commit_checklist:w;
+	q_make_collaboration_easy:e -> a_foster_welcoming_environment:w;
 	q_make_collaboration_easy:e -> a_get_orcid:w;
 	q_make_collaboration_easy:e -> a_master_manuscript_online:w;
 	q_make_collaboration_easy:e -> a_project_todo_list:w;
@@ -279,6 +286,7 @@ digraph scb {
 	a_build_tools:e -> t_pipes_filters:w;
 	a_build_tools:e -> t_writing_programs:w;
 	a_build_tools:e -> t_writing_shell_scripts:w;
+	a_choose_primary_communication_channel:e -> t_blogging:w;
 	a_choose_visualization:e -> t_choosing_visualization:w;
 	a_clean_up_data:e -> t_data_hygiene:w;
 	a_clean_up_data:e -> t_introducing_openrefine:w;
@@ -295,6 +303,8 @@ digraph scb {
 	a_dont_duplicate_large_data:e -> t_what_not_to_store:w;
 	a_eliminate_redundant_calculation:e -> t_using_make:w;
 	a_explicit_requirements:e -> t_documenting_requirements:w;
+	a_foster_welcoming_environment:e -> t_code_of_conduct:w;
+	a_foster_welcoming_environment:e -> t_identify_starting_points:w;
 	a_get_orcid:e -> t_getting_orcid:w;
 	a_give_code_meaningful_names:e -> t_programming_style:w;
 	a_good_commit_comments:e -> t_good_commit_comments:w;
@@ -378,6 +388,7 @@ digraph scb {
 	t_add_to_repository:e -> t_creating_repository:e;
 	t_add_to_repository:e -> t_introducing_version_control:e;
 	t_aggregating_data:e -> t_handling_missing_data:e;
+	t_blogging:e -> t_using_web_authoring:e;
 	t_call_stack:e -> t_variable_scope:e;
 	t_choosing_good_path_names:e -> t_filename_extensions:e;
 	t_choosing_good_path_names:e -> t_finding_files:e;
