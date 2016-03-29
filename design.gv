@@ -147,6 +147,7 @@ digraph scb {
 		t_introducing_version_control [label="Introducing Version Control"];
 		t_issue_tracking [label="Issue Tracking", fillcolor="honeydew", style="filled"];
 		t_joining_data [label="Combining Data Using Join"];
+		t_learn_about_barriers [label="Learn About Barriers to Participation", fillcolor="honeydew", style="filled"];
 		t_logging [label="Logging Program Execution", fillcolor="honeydew", style="filled"];
 		t_managing_files [label="Creating, Deleting, and Managing Files"];
 		t_merging_changes [label="Merging Changes"];
@@ -304,6 +305,7 @@ digraph scb {
 	a_eliminate_redundant_calculation:e -> t_using_make:w;
 	a_explicit_requirements:e -> t_documenting_requirements:w;
 	a_foster_welcoming_environment:e -> t_code_of_conduct:w;
+	a_foster_welcoming_environment:e -> t_learn_about_barriers:w;
 	a_foster_welcoming_environment:e -> t_identify_starting_points:w;
 	a_get_orcid:e -> t_getting_orcid:w;
 	a_give_code_meaningful_names:e -> t_programming_style:w;
@@ -394,6 +396,7 @@ digraph scb {
 	t_choosing_good_path_names:e -> t_finding_files:e;
 	t_choosing_repository_host:e -> t_introducing_version_control:e;
 	t_choosing_visualization:e -> t_plotting:e;
+	t_code_of_conduct:e -> t_learn_about_barriers:e;
 	t_code_reviews:e -> t_merging_changes:e;
 	t_code_reviews:e -> t_reviewing_version_history:e;
 	t_code_reviews:e -> t_using_branches:e;
@@ -410,6 +413,7 @@ digraph scb {
 	t_finding_software:e -> t_search_online:e;
 	t_good_commit_comments:e -> t_add_to_repository:e;
 	t_handling_missing_data:e -> t_selecting_data:e;
+	t_identify_starting_points:e -> t_issue_tracking:e;
 	t_ignoring_files:e -> t_add_to_repository:e;
 	t_installing_software:e -> t_environment_variables:e;
 	t_introducing_openrefine:e -> t_formatting_spreadsheets:e;
