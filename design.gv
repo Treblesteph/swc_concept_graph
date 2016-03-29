@@ -159,6 +159,7 @@ digraph scb {
 		t_read_csv [label="Reading CSV Files"];
 		t_reading_error_messages [label="Reading Error Messages"];
 		t_recording_history [label="Recording History"];
+		t_reproducibility [label="Reproducibility and All That"];
 		t_reviewing_version_history [label="Reviewing Version History"];
 		t_search_online [label="Searching Online", fillcolor="honeydew", style="filled"];
 		t_selecting_data [label="Selecting Data"];
@@ -395,10 +396,12 @@ digraph scb {
 	t_exporting_openrefine_history:e -> t_introducing_openrefine:e;
 	t_filtering_data:e -> t_introducing_relational_databases:e;
 	t_finding_files:e -> t_filesystem_layout:e;
+	t_finding_software:e -> t_search_online:e;
 	t_good_commit_comments:e -> t_add_to_repository:e;
 	t_handling_missing_data:e -> t_selecting_data:e;
 	t_ignoring_files:e -> t_add_to_repository:e;
 	t_installing_software:e -> t_environment_variables:e;
+	t_introducing_openrefine:e -> t_formatting_spreadsheets:e;
 	t_joining_data:e -> t_handling_missing_data:e;
 	t_managing_files:e -> t_using_editor:e;
 	t_plotting:e -> t_using_libraries:e;
@@ -410,6 +413,10 @@ digraph scb {
 	t_programming_style:e -> t_writing_functions:e;
 	t_read_csv:e -> t_csv_intro:e;
 	t_read_csv:e -> t_using_pandas:e;
+	t_reproducibility:e -> t_program_configuration:e;
+	t_reproducibility:e -> t_documenting_requirements:e;
+	t_reproducibility:e -> t_metadata:e;
+	t_reproducibility:e -> t_tracking_provenance:e;
 	t_search_online:e -> t_boolean_operators:e;
 	t_selecting_data:e -> t_introducing_relational_databases:e;
 	t_taschuks_rules:e -> t_program_configuration:e;
