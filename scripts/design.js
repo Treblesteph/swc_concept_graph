@@ -2,15 +2,12 @@ design = `// Where's open?
 digraph scb {
 	// Properties.
 	rankdir = "LR";
-	ranksep = "3 equally";
-	node [shape="box", fontsize=12];
+	node [shape="rect", fontsize=12];
 
 	// ----------------------------------------
 	// Questions.
 	// ----------------------------------------
-	subgraph questions {
-		node [color="teal"];
-		rank = "same";
+
 		q_avoid_losing_work [label="How can I avoid losing work?"];
 		q_find_use_others_data [label="How can I find and use\nother people's data?"];
 		q_find_use_others_software [label="How can I find and use\nother people's software?"];
@@ -21,14 +18,12 @@ digraph scb {
 		q_make_software_findable_usable [label="How can I make it easy for people\nto find and use my software?"];
 		q_results_correct [label="How can I tell if my results are correct?"];
 		q_results_reproducible [label="How can I make it easy for people\nto reproduce my results?"];
-	}
+
 
 	// ----------------------------------------
 	// Answers.
 	// ----------------------------------------
-	subgraph answers {
-		node [color="sienna"];
-		rank = "same";
+
 		a_add_assertions [label="Add assertions to the software to document invariants."];
 		a_add_human_work_to_repo [label="Put everything created by people into version control."];
 		a_atomic_values [label="Make every value atomic."];
@@ -92,14 +87,12 @@ digraph scb {
 		a_use_relational_database [label="Store data in a relational database."];
 		a_write_readable_software [label="Write readable software."];
 		a_write_unit_tests [label="Write unit tests to specify and check behavior."];
-	}
+
 
 	// ----------------------------------------
 	// Topics.
 	// ----------------------------------------
-	subgraph topics {
-		node [color="goldenrod"];
-		rank = "same";
+
 		t_add_to_repository [label="Adding Files to a Repository"];
 		t_aggregating_data [label="Aggregating Data"];
 		t_blogging [label="Publishing a Blog", fillcolor="honeydew", style="filled"];
@@ -196,7 +189,7 @@ digraph scb {
 		t_writing_shell_loops [label="Writing Loops in the Shell"];
 		t_writing_shell_scripts [label="Writing Shell Scripts"];
 		t_writing_unit_tests [label="Writing Unit Tests", fillcolor="honeydew", style="filled"];
-	}
+
 
 	// ----------------------------------------
 	// Questions to answers.
