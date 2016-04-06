@@ -55,7 +55,7 @@ function zoom() {
 }
 
 var padding = 10, // separation between circles
-    radius = 8;
+    radius = 60;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
@@ -113,7 +113,6 @@ for (i = 0; i < graph.nodes.length; i++) {
 };
 graph.links.forEach(function (d) {
   linkedByIndex[d.source + "," + d.target] = true;
-  console.log(d);
 });
 
 //This function looks up whether a pair are neighbours
