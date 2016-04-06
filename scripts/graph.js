@@ -1,8 +1,10 @@
 // Set the size of the diagram.
 var width = $(document).width(),
-    height = $(document).height();
+    height = $(document).height(),
+    color = d3.scale.category10();
 
-// Read in graph data.
+
+// Read in graph data and convert to more simple object.
 var g = graphlibDot.read(design),
     node_info = g._nodes;
     edge_info = g._edgeObjs;
@@ -37,29 +39,63 @@ var graph = {
   "nodes": nodesArray, "links": linksArray
 }
 
-var color = d3.scale.category10();
+// Create svg for the graph.
+var svg = d3.select("#graph-container")
+            .append("svg")
+            .attr("class", "overlay")
 
 // Making the zoom functionality.
+var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]);
+
+// Set up an SVG group so that we can translate the final graph.
+var svgGroup = svg.append("g");
+
 function zoom() {
   svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale +")");
 }
 
-var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+var padding = 10, // separation between circles
+    radius = 8;
+
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(graph.nodes);
+  return function(d) {
+    var rb = 2 * radius + padding,
+        nx1 = d.x - rb,
+        nx2 = d.x + rb,
+        ny1 = d.y - rb,
+        ny2 = d.y + rb;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y);
+          if (l < rb) {
+          l = (l - rb) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}
 
 function tick(e){
   var k = 6 * e.alpha;
 
-  link
-      .each(function(d) { d.source.y -= k, d.target.y += k; })
+  link.each(function(d) { d.source.y -= k, d.target.y += k; })
       .attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
-  node
-      .attr("x", function(d) { return d.x; })
+  node.attr("x", function(d) { return d.x; })
       .attr("y", function(d) { return d.y; });
 
+  node.each(collide(0.5));
 }
 
 // Making d3 force layout.
@@ -69,14 +105,15 @@ var force = d3.layout.force()
               .size([width, height]);
 
 // Toggle stores whether the highlighting is on.
-var toggle = 0;
+var toggle = false;
 //Create an array logging what is connected to what.
 var linkedByIndex = {};
 for (i = 0; i < graph.nodes.length; i++) {
-     linkedByIndex[i + "," + i] = 1;
+     linkedByIndex[i + "," + i] = true;
 };
 graph.links.forEach(function (d) {
-  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+  linkedByIndex[d.source + "," + d.target] = true;
+  console.log(d);
 });
 
 //This function looks up whether a pair are neighbours
@@ -84,40 +121,35 @@ function neighboring(a, b) {
   return linkedByIndex[a.index + "," + b.index];
 }
 function connectedNodes() {
-  if (toggle == 0) {
+  if (!toggle) {
     //Reduce the opacity of all but the neighbouring nodes
     d = d3.select(this).node().__data__;
     node.style("opacity", function (o) {
-      return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+      return neighboring(d, o) || neighboring(o, d) ? 1 : 0.1;
     });
     link.style("opacity", function (o) {
-      return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+      return (d.index == o.source.index || d.index == o.target.index) ? 1 : 0.1;
     });
-    //Reduce the op
-    toggle = 1;
+    // Reduce the opacity.
+    toggle = true;
   } else {
-  //Put them back to opacity=1
+  // Put them back to opacity = 1.
   node.style("opacity", 1);
   link.style("opacity", 1);
-  toggle = 0;
+  toggle = false;
   }
 }
 
-force
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .on("tick", tick)
-    .start();
+force.nodes(graph.nodes)
+     .links(graph.links)
+     .on("tick", tick)
+     .start();
 
+zoomListener.on("zoom", zoom);
 
-var svg = d3.select("#graph-container").append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("class", "overlay")
-            .call(zoomListener);
-
-// Set up an SVG group so that we can translate the final graph.
-var svgGroup = svg.append("g");
+svg.attr("width", width)
+   .attr("height", height)
+   .call(zoomListener);
 
 // Add arrows to paths.
 svg.append("defs").selectAll("marker")
