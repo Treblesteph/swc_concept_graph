@@ -3,3 +3,10 @@
 .DS_Store
 .sass-cache
 _site
+collapsibleforce_example.js
+forcetree_example.js
+newgraph.js
+oldgraph.js
+spare.js
+treelayout.js
+oldgraphstyle.css
