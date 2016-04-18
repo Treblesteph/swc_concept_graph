@@ -39,6 +39,13 @@ var graph = {
   "nodes": nodesArray, "links": linksArray
 }
 
+// Making d3 force layout.
+var force = d3.layout.force()
+              .charge(-150)
+              .linkDistance(10)
+              .size([width, height]);
+
+
 // Create svg for the graph.
 var svg = d3.select("#graph-container")
             .append("svg")
@@ -55,7 +62,7 @@ function zoom() {
 }
 
 var padding = 10, // separation between circles
-    radius = 60;
+    radius = 35;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
@@ -92,17 +99,11 @@ function tick(e){
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
-  node.attr("x", function(d) { return d.x; })
-      .attr("y", function(d) { return d.y; });
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
 
-  node.each(collide(0.5));
+  node.each(collide(0.05));
 }
-
-// Making d3 force layout.
-var force = d3.layout.force()
-              .charge(-150)
-              .linkDistance(10)
-              .size([width, height]);
 
 // Toggle stores whether the highlighting is on.
 var toggle = false;
@@ -147,8 +148,9 @@ force.nodes(graph.nodes)
 zoomListener.on("zoom", zoom);
 
 svg.attr("width", width)
-   .attr("height", height)
-   .call(zoomListener);
+   .attr("height", height);
+
+svgGroup.call(zoomListener);
 
 // Add arrows to paths.
 svg.append("defs").selectAll("marker")
@@ -174,8 +176,10 @@ var link = svg.selectAll(".link")
 
 var node = svg.selectAll(".node")
               .data(graph.nodes)
-              .enter().append("rect")
+              .enter().append("circle")
+              .attr("r", 50)
               .attr("class", "node")
+              .append("rect")
               .attr("width", 45)
               .attr("height", 15)
               .style("fill", function(d) {
