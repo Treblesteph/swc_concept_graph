@@ -42,7 +42,7 @@ var graph = {
 // Making d3 force layout.
 var force = d3.layout.force()
               .charge(-150)
-              .linkDistance(10)
+              .linkDistance(15)
               .size([width, height]);
 
 
@@ -64,38 +64,45 @@ function zoom() {
 var padding = 10, // separation between circles
     radius = 45;
 
-function collide(alpha) {
-  var quadtree = d3.geom.quadtree(graph.nodes);
-  return function(d) {
-    var rb = 2 * radius + padding,
-        nx1 = d.x - rb,
-        nx2 = d.x + rb,
-        ny1 = d.y - rb,
-        ny2 = d.y + rb;
-    quadtree.visit(function(quad, x1, y1, x2, y2) {
-      if (quad.point && (quad.point !== d)) {
-        var x = d.x - quad.point.x,
-            y = d.y - quad.point.y,
-            l = Math.sqrt(x * x + y * y);
-          if (l < rb) {
-          l = (l - rb) / l * alpha;
-          d.x -= x *= l;
-          d.y -= y *= l;
-          quad.point.x += x;
-          quad.point.y += y;
-        }
-      }
-      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-    });
-  };
-}
+// function collide(alpha) {
+//   var quadtree = d3.geom.quadtree(graph.nodes);
+//   return function(d) {
+//     var rb = 2 * radius + padding,
+//         nx1 = d.x - rb,
+//         nx2 = d.x + rb,
+//         ny1 = d.y - rb,
+//         ny2 = d.y + rb;
+//     quadtree.visit(function(quad, x1, y1, x2, y2) {
+//       if (quad.point && (quad.point !== d)) {
+//         var x = d.x - quad.point.x,
+//             y = d.y - quad.point.y,
+//             l = Math.sqrt(x * x + y * y);
+//           if (l < rb) {
+//           l = (l - rb) / l * alpha;
+//           d.x -= x *= l;
+//           d.y -= y *= l;
+//           quad.point.x += x;
+//           quad.point.y += y;
+//         }
+//       }
+//       return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+//     });
+//   };
+// }
 
 function tick(e){
   var k = 6 * e.alpha;
 
-  graph.nodes.forEach(function(o, i) {
-    o.y += i & 1 ? k : -k;
-    o.x += i & 2 ? k : -k;
+  graph.nodes.forEach(function(o) {
+    if (o.group == "q") {
+      o.x -= 3;
+    } else if (o.group == "a") {
+      o.x += 0;
+    } else if (o.group == "t") {
+      o.x += 1;
+    } else {
+      console.log("wrong group names")
+    }
   });
 
   link.each(function(d) { d.source.y -= k, d.target.y += k; })
@@ -107,7 +114,7 @@ function tick(e){
   node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
 
-  node.each(collide(0.05));
+  // node.each(collide(0.05));
 }
 
 // Toggle stores whether the highlighting is on.
