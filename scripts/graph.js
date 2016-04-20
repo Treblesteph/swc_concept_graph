@@ -62,7 +62,7 @@ function zoom() {
 }
 
 var padding = 10, // separation between circles
-    radius = 35;
+    radius = 45;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
@@ -92,6 +92,11 @@ function collide(alpha) {
 
 function tick(e){
   var k = 6 * e.alpha;
+
+  graph.nodes.forEach(function(o, i) {
+    o.y += i & 1 ? k : -k;
+    o.x += i & 2 ? k : -k;
+  });
 
   link.each(function(d) { d.source.y -= k, d.target.y += k; })
       .attr("x1", function(d) { return d.source.x; })
@@ -177,14 +182,14 @@ var link = svg.selectAll(".link")
 var node = svg.selectAll(".node")
               .data(graph.nodes)
               .enter().append("circle")
-              .attr("r", 50)
+              .attr("r", 15)
               .attr("class", "node")
-              .append("rect")
-              .attr("width", 45)
-              .attr("height", 15)
-              .style("fill", function(d) {
-                return color(d.group);
-              })
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; })
+              // .append("rect")
+              // .attr("width", 45)
+              // .attr("height", 15)
+              .style("fill", function(d) { return color(d.group) })
               .call(force.drag)
               .on('dblclick', connectedNodes);
 
