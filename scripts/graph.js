@@ -41,9 +41,13 @@ var graph = {
 
 // Making d3 force layout.
 var force = d3.layout.force()
-              .charge(-150)
-              .linkDistance(15)
-              .size([width, height]);
+              .charge(-950)
+              .linkDistance(45)
+              .linkStrength(1)
+              .friction(0.1)
+              .alpha(0.99)
+              .size([0.9 * width, 0.9 * height])
+              .gravity(0.3);
 
 
 // Create svg for the graph.
@@ -61,9 +65,9 @@ function zoom() {
   svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale +")");
 }
 
-var padding = 10, // separation between circles
-    radius = 45;
-
+// var padding = 10, // separation between circles
+//     radius = 45;
+//
 // function collide(alpha) {
 //   var quadtree = d3.geom.quadtree(graph.nodes);
 //   return function(d) {
@@ -91,8 +95,7 @@ var padding = 10, // separation between circles
 // }
 
 function tick(e){
-  var k = 6 * e.alpha;
-
+  var k = 0.1 * e.alpha;
   graph.nodes.forEach(function(o) {
     if (o.group == "q") {
       o.x -= 3;
