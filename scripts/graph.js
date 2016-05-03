@@ -33,6 +33,14 @@ Object.keys(edge_info).forEach(function(a) {
   linksArray.push(thisedge);
 })
 
+// Extract only questions for nodes initially.
+var questions = [];
+Object.keys(nodesArray).forEach(function(a) {
+  if (nodesArray[a].group == "q") {
+    questions.push(nodesArray[a])
+  }
+})
+
 // Create graph object.
 var graph = {
   "nodes": nodesArray, "links": linksArray
@@ -41,8 +49,8 @@ var graph = {
 // Make d3 force layout.
 var force = d3.layout.force()
                      .nodes(graph.nodes)
-                     .links([])
-                     .gravity(0.01)
+                     .links(graph.links)
+                     .gravity(0.1)
                      .charge(0)
                      .size([width, height])
                      .on("tick", tick)
@@ -54,13 +62,14 @@ var svg = d3.select("#graph-container")
             .attr("class", "overlay")
 
 // Collision avoidance function.
-var padding = 5, // separation between circles
-    radius = 25;
+var padding = 15,
+    clusterPadding = 6,
+    radius = 12;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
   return function(d) {
-    var rb = 2 * radius + padding,
+    var rb = (d.group == "q") ? radius + 125 : radius + 5,
         nx1 = d.x - rb,
         nx2 = d.x + rb,
         ny1 = d.y - rb,
@@ -84,17 +93,34 @@ function collide(alpha) {
 }
 
 function tick(e) {
-  d3.selectAll("rect").attr("x", function(d) { return d.x; })
-                      .attr("y", function(d) { return d.y; })
+  var k = 0.1 * e.alpha;
+  d3.selectAll("circle").attr("cx", function(d) { return d.x; })
+                        .attr("cy", function(d) { return d.y; })
 
-  d3.selectAll("text").attr("x", function(d) { return d.x; })
-                      .attr("y", function(d) { return d.y; })
+  d3.selectAll("foreignObject").attr("x", function(d) { return d.x - 45; })
+                               .attr("y", function(d) { return d.y - 40; })
 
-  node.each(collide(0.05));
+  link.each(function(d) { d.source.y -= k, d.target.y += k; })
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.each(collide(0.5));
 }
+
+// Enlarging different groups of nodes.
+document.getElementById("showquestions").onclick = function () { showAll("q"); }
+document.getElementById("showanswers").onclick = function () { showAll("a"); }
+document.getElementById("showtopics").onclick = function () { showAll("t"); }
 
 svg.attr("width", width)
    .attr("height", height);
+
+var link = svg.selectAll(".link")
+              .data(graph.links)
+              .enter().append("line")
+              .attr("class", "link");
 
 var node = svg.selectAll(".node")
               .data(graph.nodes)
@@ -102,14 +128,22 @@ var node = svg.selectAll(".node")
               .attr("class", "node")
               .call(force.drag);
 
-node.append("rect")
-    .attr("x", function(d) { return d.x; })
-    .attr("y", function(d) { return d.y; })
-    .attr("width", function(d) { return 26 + 4 * d.label.length})
-    .attr("height", 15)
+node.append("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", 5)
     .style("fill", function(d) { return color(d.group) })
+    .classed("bignodes", function(d) {
+      return d.group == "q";
+    });
 
-node.append("text")
-    .attr("dx", 3)
-    .attr("dy", "1.1em")
-    .text(function(d) { return d.label });
+node.append("foreignObject")
+    .attr("dx", -45)
+    .attr("dy", -40)
+    .attr("width", 100)
+    .append("xhtml:body")
+    .text(function(d) {
+      if (d.group == "q") {
+        return d.label
+      }
+    });
