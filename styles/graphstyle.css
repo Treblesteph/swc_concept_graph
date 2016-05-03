@@ -1,7 +1,5 @@
 
 .node {
-  stroke: #fff;
-  stroke-width: 1.5px;
   cursor: pointer;
 }
 
@@ -10,7 +8,18 @@
   stroke-opacity: 0.6;
 }
 
-.node text {
+.node foreignObject {
   pointer-events: none;
-  font: 10px sans-serif;
+  font: 14px sans-serif;
+  color: white;
+}
+
+.node circle {
+  border-radius: 30px;
+  fill: skyblue;
+  stroke: white;
+}
+
+.bignodes {
+  r: 75;
 }
