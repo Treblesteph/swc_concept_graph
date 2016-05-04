@@ -21,9 +21,9 @@
 }
 
 .bignodes circle {
-  r: 75;
+  r: 65;
 }
 
 .bignodes foreignObject {
-  font: 14px sans-serif !important;
+  font: 12px sans-serif !important;
 }
