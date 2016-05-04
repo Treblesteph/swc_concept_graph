@@ -1,6 +1,6 @@
 // Set the size of diagram.
-var width = 1500,
-    height = 900
+var width = 2000,
+    height = 1100
     color = d3.scale.category10();
 
 // Read in data and convert to more simple object.
@@ -52,6 +52,7 @@ var force = d3.layout.force()
                      .links(graph.links)
                      .gravity(0.1)
                      .charge(0)
+                     .friction(0.1)
                      .size([width, height])
                      .on("tick", tick)
                      .start();
@@ -62,9 +63,9 @@ var svg = d3.select("#graph-container")
             .attr("class", "overlay")
 
 // Collision avoidance function.
-var padding = 15,
+var padding = 10,
     clusterPadding = 6,
-    radius = 25;
+    radius = 10;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
@@ -117,11 +118,12 @@ document.getElementById("showtopics").onclick = function () { showAll("t"); }
 
 function showAll(group) {
   selectedgroup = group;
-  return d3.selectAll("g")
-           .classed("bignodes", false)
-           .classed("bignodes", function (d, i) {
-             return d.group == group;
-           });
+  d3.selectAll("g")
+    .classed("bignodes", false)
+    .classed("bignodes", function (d, i) {
+      return d.group == group;
+    });
+  force.start();
 }
 
 svg.attr("width", width)
@@ -147,7 +149,37 @@ node.append("circle")
 
 node.append("foreignObject")
     .attr("dx", -45)
-    .attr("dy", -40)
-    .attr("width", 100)
+    .attr("dy", -60)
+    .attr("width", 86)
     .append("xhtml:body")
     .text(function(d) { return d.label });
+
+
+var optArray = [];
+for (var i = 0; i < graph.nodes.length - 1; i++) {
+    optArray.push(graph.nodes[i].name);
+}
+optArray = optArray.sort();
+$(function () {
+    $("#search").autocomplete({
+        source: optArray
+    });
+});
+function searchNode() {
+    //find the node
+    var selectedVal = document.getElementById('search').value;
+    var node = svg.selectAll(".node");
+    if (selectedVal == "none") {
+        node.style("stroke", "white").style("stroke-width", "1");
+    } else {
+        var selected = node.filter(function (d, i) {
+            return d.name != selectedVal;
+        });
+        selected.style("opacity", "0");
+        var link = svg.selectAll(".link")
+        link.style("opacity", "0");
+        d3.selectAll(".node, .link").transition()
+            .duration(5000)
+            .style("opacity", 1);
+    }
+}
