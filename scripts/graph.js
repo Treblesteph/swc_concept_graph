@@ -64,12 +64,12 @@ var svg = d3.select("#graph-container")
 // Collision avoidance function.
 var padding = 15,
     clusterPadding = 6,
-    radius = 12;
+    radius = 25;
 
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
   return function(d) {
-    var rb = (d.group == "q") ? radius + 125 : radius + 5,
+    var rb = (d.group == selectedgroup) ? radius + 125 : radius + 5,
         nx1 = d.x - rb,
         nx2 = d.x + rb,
         ny1 = d.y - rb,
@@ -110,9 +110,19 @@ function tick(e) {
 }
 
 // Enlarging different groups of nodes.
+var selectedgroup = "q";
 document.getElementById("showquestions").onclick = function () { showAll("q"); }
 document.getElementById("showanswers").onclick = function () { showAll("a"); }
 document.getElementById("showtopics").onclick = function () { showAll("t"); }
+
+function showAll(group) {
+  selectedgroup = group;
+  return d3.selectAll("g")
+           .classed("bignodes", false)
+           .classed("bignodes", function (d, i) {
+             return d.group == group;
+           });
+}
 
 svg.attr("width", width)
    .attr("height", height);
@@ -126,24 +136,18 @@ var node = svg.selectAll(".node")
               .data(graph.nodes)
               .enter().append("g")
               .attr("class", "node")
+              .classed("bignodes", function(d) { return d.group == "q"; })
               .call(force.drag);
 
 node.append("circle")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", 5)
-    .style("fill", function(d) { return color(d.group) })
-    .classed("bignodes", function(d) {
-      return d.group == "q";
-    });
+    .style("fill", function(d) { return color(d.group) });
 
 node.append("foreignObject")
     .attr("dx", -45)
     .attr("dy", -40)
     .attr("width", 100)
     .append("xhtml:body")
-    .text(function(d) {
-      if (d.group == "q") {
-        return d.label
-      }
-    });
+    .text(function(d) { return d.label });
