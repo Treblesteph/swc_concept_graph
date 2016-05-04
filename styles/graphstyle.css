@@ -10,7 +10,7 @@
 
 .node foreignObject {
   pointer-events: none;
-  font: 14px sans-serif;
+  font: 0px sans-serif;
   color: white;
 }
 
@@ -20,6 +20,10 @@
   stroke: white;
 }
 
-.bignodes {
+.bignodes circle {
   r: 75;
+}
+
+.bignodes foreignObject {
+  font: 14px sans-serif !important;
 }
