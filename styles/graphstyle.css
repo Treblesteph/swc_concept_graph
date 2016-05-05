@@ -11,19 +11,22 @@
 .node foreignObject {
   pointer-events: none;
   font: 0px sans-serif;
+  padding: 0px;
   color: white;
 }
 
 .node circle {
-  border-radius: 30px;
-  fill: skyblue;
   stroke: white;
 }
 
 .bignodes circle {
-  r: 65;
+  fill: none !important;
 }
 
 .bignodes foreignObject {
   font: 12px sans-serif !important;
+}
+
+.bignodes .textbox {
+  padding: 10px !important;
 }
