@@ -70,7 +70,7 @@ var padding = 10,
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
   return function(d) {
-    var rb = (d.group == selectedgroup) ? radius + 125 : radius + 5,
+    var rb = (d.group == selectedgroup) ? radius + 100 : radius + 5,
         nx1 = d.x - rb,
         nx2 = d.x + rb,
         ny1 = d.y - rb,
@@ -93,6 +93,40 @@ function collide(alpha) {
   };
 }
 
+//Toggle stores whether the highlighting is on
+var toggle = false;
+//Create an array logging what is connected to what
+var linkedByIndex = {};
+for (i = 0; i < graph.nodes.length; i++) {
+    linkedByIndex[i + "," + i] = true;
+};
+graph.links.forEach(function (d) {
+    linkedByIndex[d.source.index + "," + d.target.index] = true;
+});
+//This function looks up whether a pair are neighbours
+function neighboring(a, b) {
+    return linkedByIndex[a.index + "," + b.index];
+}
+function connectedNodes() {
+    if (!toggle) {
+        //Reduce the opacity of all but the neighbouring nodes
+        d = d3.select(this).node().__data__;
+        node.style("opacity", function (o) {
+            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+        });
+        link.style("opacity", function (o) {
+            return d.index == o.source.index | d.index == o.target.index ? 1 : 0.1;
+        });
+        //Reduce the op
+        toggle = true;
+    } else {
+        //Put them back to opacity=1
+        node.style("opacity", 1);
+        link.style("opacity", 1);
+        toggle = false;
+    }
+}
+
 function tick(e) {
   var k = 0.1 * e.alpha;
   d3.selectAll("circle").attr("cx", function(d) { return d.x; })
@@ -112,11 +146,11 @@ function tick(e) {
 
 // Enlarging different groups of nodes.
 var selectedgroup = "q";
-document.getElementById("showquestions").onclick = function () { showAll("q"); }
-document.getElementById("showanswers").onclick = function () { showAll("a"); }
-document.getElementById("showtopics").onclick = function () { showAll("t"); }
+document.getElementById("showquestions").onclick = function () { showAllgroup("q"); }
+document.getElementById("showanswers").onclick = function () { showAllgroup("a"); }
+document.getElementById("showtopics").onclick = function () { showAllgroup("t"); }
 
-function showAll(group) {
+function showAllgroup(group) {
   selectedgroup = group;
   d3.selectAll("g")
     .classed("bignodes", false)
@@ -139,7 +173,8 @@ var node = svg.selectAll(".node")
               .enter().append("g")
               .attr("class", "node")
               .classed("bignodes", function(d) { return d.group == "q"; })
-              .call(force.drag);
+              .call(force.drag)
+              .on('dblclick', connectedNodes);;
 
 node.append("circle")
     .attr("cx", function(d) { return d.x; })
@@ -150,10 +185,15 @@ node.append("circle")
 node.append("foreignObject")
     .attr("dx", -45)
     .attr("dy", -60)
-    .attr("width", 86)
+    .attr("width", 200)
     .append("xhtml:body")
+    .classed("textbox", true)
+    .style("background-color", function(d) { return color(d.group) })
+    .style("border-radius", "5px")
     .text(function(d) { return d.label });
 
+node.append("title")
+    .text(function(d) { return d.label; });
 
 var optArray = [];
 for (var i = 0; i < graph.nodes.length - 1; i++) {
