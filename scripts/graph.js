@@ -1,5 +1,5 @@
 // Set the size of diagram.
-var width = 2000,
+var width = 1800,
     height = 1100
     color = d3.scale.category10();
 
@@ -70,11 +70,11 @@ var padding = 10,
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes);
   return function(d) {
-    var rb = (d.group == selectedgroup) ? radius + 100 : radius + 5,
+    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 200 : radius + 5,
         nx1 = d.x - rb,
         nx2 = d.x + rb,
-        ny1 = d.y - rb,
-        ny2 = d.y + rb;
+        ny1 = d.y - rb / 2,
+        ny2 = d.y + rb / 2;
     quadtree.visit(function(quad, x1, y1, x2, y2) {
       if (quad.point && (quad.point !== d)) {
         var x = d.x - quad.point.x,
@@ -83,7 +83,7 @@ function collide(alpha) {
           if (l < rb) {
           l = (l - rb) / l * alpha;
           d.x -= x *= l;
-          d.y -= y *= l;
+          d.y -= y *= l / 2;
           quad.point.x += x;
           quad.point.y += y;
         }
@@ -132,8 +132,8 @@ function tick(e) {
   d3.selectAll("circle").attr("cx", function(d) { return d.x; })
                         .attr("cy", function(d) { return d.y; })
 
-  d3.selectAll("foreignObject").attr("x", function(d) { return d.x - 45; })
-                               .attr("y", function(d) { return d.y - 40; })
+  d3.selectAll("foreignObject").attr("x", function(d) { return d.x - 100; })
+                               .attr("y", function(d) { return d.y - 10; })
 
   link.each(function(d) { d.source.y -= k, d.target.y += k; })
       .attr("x1", function(d) { return d.source.x; })
@@ -144,18 +144,42 @@ function tick(e) {
   node.each(collide(0.5));
 }
 
-// Enlarging different groups of nodes.
-var selectedgroup = "q";
-document.getElementById("showquestions").onclick = function () { showAllgroup("q"); }
-document.getElementById("showanswers").onclick = function () { showAllgroup("a"); }
-document.getElementById("showtopics").onclick = function () { showAllgroup("t"); }
+selectedIndices = [];
+graph.nodes.forEach(function(d) {
+  if (d.group == "q") {
+    selectedIndices.push(d.index)
+  }
+});
+showAll(selectedIndices);
 
-function showAllgroup(group) {
-  selectedgroup = group;
+function showGroup(group) {
+  selectedIndices = [];
+  graph.nodes.forEach(function(d) {
+    if (d.group == group) {
+      selectedIndices.push(d.index)
+    }
+  })
+}
+
+// Enlarging different groups of nodes by group with buttons.
+document.getElementById("showquestions").onclick = function () {
+  showGroup("q")
+  showAll(selectedIndices);
+}
+document.getElementById("showanswers").onclick = function () {
+  showGroup("a")
+  showAll(selectedIndices)
+}
+document.getElementById("showtopics").onclick = function () {
+  showGroup("t")
+  showAll(selectedIndices);
+}
+
+function showAll(indexArray) {
   d3.selectAll("g")
     .classed("bignodes", false)
     .classed("bignodes", function (d, i) {
-      return d.group == group;
+      return $.inArray(d.index, indexArray) > -1;
     });
   force.start();
 }
@@ -172,9 +196,8 @@ var node = svg.selectAll(".node")
               .data(graph.nodes)
               .enter().append("g")
               .attr("class", "node")
-              .classed("bignodes", function(d) { return d.group == "q"; })
               .call(force.drag)
-              .on('dblclick', connectedNodes);;
+              .on('dblclick', connectedNodes);
 
 node.append("circle")
     .attr("cx", function(d) { return d.x; })
@@ -183,14 +206,15 @@ node.append("circle")
     .style("fill", function(d) { return color(d.group) });
 
 node.append("foreignObject")
-    .attr("dx", -45)
-    .attr("dy", -60)
+    .attr("dx", -200)
+    .attr("dy", -10)
     .attr("width", 200)
     .append("xhtml:body")
     .classed("textbox", true)
     .style("background-color", function(d) { return color(d.group) })
     .style("border-radius", "5px")
-    .text(function(d) { return d.label });
+    .text(function(d) { return d.label })
+    .call(force.drag);
 
 node.append("title")
     .text(function(d) { return d.label; });
