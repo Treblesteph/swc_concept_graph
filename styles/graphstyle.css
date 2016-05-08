@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 .node {
   cursor: pointer;
@@ -29,4 +30,71 @@
 
 .bignodes .textbox {
   padding: 10px !important;
+}
+
+button, input {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  border: 0px solid;
+  background-color: white;
+  padding: 6px 10px;
+  margin: 6px;
+  outline: none;
+  opacity: 0.85;
+}
+
+input {
+  border-bottom: 1px dotted;
+  margin-left: 40px;
+}
+
+button:hover, input:hover, .ui-menu-item:hover {
+  outline: none;
+  opacity: 1.0;
+}
+
+.question {
+  fill: rgb(31, 119, 180);
+  background-color: rgb(31, 119, 180);
+  color: white;
+}
+
+.answer {
+  fill: rgb(255, 127, 14);
+  background-color: rgb(255, 127, 14);
+  color: white;
+}
+
+.answer {
+  fill: rgb(255, 127, 14);
+  background-color: rgb(255, 127, 14);
+  color: white;
+}
+
+.topic {
+  fill: rgb(44, 160, 44);
+  background-color: rgb(44, 160, 44);
+  color: white;
+}
+
+.widget-bar {
+  width: auto;
+  position: absolute;
+}
+
+.ui-autocomplete {
+  list-style-type: none;
+  padding: 0;
+  padding-top: 20px;
+}
+
+.ui-menu-item {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  border: 0px solid;
+  background-color: white;
+  padding: 6px 10px;
+  margin: 6px;
+  outline: none;
+  opacity: 0.85;
 }

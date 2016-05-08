@@ -7,15 +7,13 @@
   </head>
   <body>
     <div id="graph-container">
-      <div>
-        <a id="showquestions"><button name="questions">questions</button></a>
-        <a id="showanswers"><button name="answers">answers</button></a>
-        <a id="showtopics"><button name="topics">topics</button></a>
-
-        <div class="ui-widget">
+      <div class="widget-bar">
+        <a id="showquestions"><button name="questions" class="question">questions</button></a>
+        <a id="showanswers"><button name="answers" class="answer">answers</button></a>
+        <a id="showtopics"><button name="topics" class="topic">topics</button></a>
           <input id="search">
+          <input type="hidden" id="search-id">
           <button type="button" onclick="searchNode()">Search</button>
-        </div>
       </div>
     </div>
 

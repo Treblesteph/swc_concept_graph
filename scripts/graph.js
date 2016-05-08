@@ -215,19 +215,31 @@ node.append("foreignObject")
 node.append("title")
     .text(function(d) { return d.label; });
 
-var optArray = [];
-for (var i = 0; i < graph.nodes.length - 1; i++) {
-    optArray.push(graph.nodes[i].name);
-}
-optArray = optArray.sort();
+var optArray = graph.nodes.map(function(node) {
+  return {
+    value: node.name,
+    label: node.label
+  }
+})
+
 $(function () {
-    $("#search").autocomplete({
-        source: optArray
-    });
+  $("#search").autocomplete({
+    source: optArray,
+    focus: function( event, ui ) {
+      $( "#search" ).val( ui.item.label );
+      return false;
+    },
+    select: function( event, ui ) {
+      $( "#search" ).val( ui.item.label );
+      $( "#search-id" ).val( ui.item.value );
+      return false;
+    }
+  });
 });
+
 function searchNode() {
     //find the node
-    var selectedVal = document.getElementById('search').value;
+    var selectedVal = document.getElementById('search-id').value;
     var node = svg.selectAll(".node");
     if (selectedVal == "none") {
         node.style("stroke", "white").style("stroke-width", "1");
