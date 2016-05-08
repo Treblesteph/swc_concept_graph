@@ -1,7 +1,9 @@
 // Set the size of diagram.
 var width = 1800,
-    height = 1100
-    color = d3.scale.category10();
+    height = 1100,
+    color = d3.scale.category10(),
+    selectedIndices = [];
+
 
 // Read in data and convert to more simple object.
 var g = graphlibDot.read(design),
@@ -144,8 +146,10 @@ function tick(e) {
   node.each(collide(0.5));
 }
 
-var selectedIndices = showGroup("q")
-showAll(selectedIndices);
+setTimeout(function() {
+  selectedIndices = showGroup("q")
+  showAll(selectedIndices);
+}, 2000)
 
 function showGroup(group) {
   selectedIndices = [];
