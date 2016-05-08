@@ -144,12 +144,7 @@ function tick(e) {
   node.each(collide(0.5));
 }
 
-selectedIndices = [];
-graph.nodes.forEach(function(d) {
-  if (d.group == "q") {
-    selectedIndices.push(d.index)
-  }
-});
+var selectedIndices = showGroup("q")
 showAll(selectedIndices);
 
 function showGroup(group) {
@@ -159,6 +154,7 @@ function showGroup(group) {
       selectedIndices.push(d.index)
     }
   })
+  return selectedIndices
 }
 
 // Enlarging different groups of nodes by group with buttons.
