@@ -35,14 +35,6 @@ Object.keys(edge_info).forEach(function(a) {
   linksArray.push(thisedge);
 })
 
-// Extract only questions for nodes initially.
-var questions = [];
-Object.keys(nodesArray).forEach(function(a) {
-  if (nodesArray[a].group == "q") {
-    questions.push(nodesArray[a])
-  }
-})
-
 // Create graph object.
 var graph = {
   "nodes": nodesArray, "links": linksArray
