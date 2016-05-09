@@ -62,11 +62,11 @@ var radius = 10
 function collide (alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes)
   return function (d) {
-    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 200 : radius + 5
+    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 75 : radius + 5
     var nx1 = d.x - rb
     var nx2 = d.x + rb
-    var ny1 = d.y - rb / 2
-    var ny2 = d.y + rb / 2
+    var ny1 = d.y - rb
+    var ny2 = d.y + rb
     quadtree.visit(function (quad, x1, y1, x2, y2) {
       if (quad.point && (quad.point !== d)) {
         var x = d.x - quad.point.x
@@ -138,7 +138,6 @@ function connectedNodes () {
     } else if (d.group === 'q') {
       selectedIndices = getDownstream(d.index)
       showAll(selectedIndices)
-
     }
     toggle = true
   } else {
@@ -154,11 +153,11 @@ function tick (e) {
   d3.selectAll('circle')
     .attr('cx', function (d) {
       if (d.group === 'q') {
-        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+        return d.x = width / 6
       } else if (d.group === 'a') {
-        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+        return d.x = width / 2
       } else if (d.group === 't') {
-        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+        return d.x = 5 * width / 6
       }
     })
     .attr('cy', function (d) {
