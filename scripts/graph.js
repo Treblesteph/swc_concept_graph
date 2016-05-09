@@ -1,43 +1,43 @@
 // Set the size of diagram.
-var width = 1800,
-    height = 1100,
-    color = d3.scale.category10(),
-    selectedIndices = [];
-
+var width = 1800
+var height = 1100
+var color = d3.scale.category10()
+var selectedIndices = []
 
 // Read in data and convert to more simple object.
-var g = graphlibDot.read(design),
-    node_info = g._nodes,
-    edge_info = g._edgeObjs;
+var g = graphlibDot.read(design)
+var node_info = g._nodes
+var edge_info = g._edgeObjs
 
-var nodesArray = [],
-    linksArray = [];
+var nodesArray = []
+var linksArray = []
 
-var indexval = 0;
+var indexval = 0
+
 // Loop through all nodes, adding their labels and groups.
-Object.keys(node_info).forEach(function(a) {
-  node_info[a].i = indexval;
-  indexval ++;
-  var thisnode = {};
-  thisnode["name"] = a;
-  thisnode["label"] = node_info[a].label;
-  thisnode["group"] = a[0];
-  nodesArray.push(thisnode);
+Object.keys(node_info).forEach(function (a) {
+  node_info[a].i = indexval
+  indexval++
+  var thisnode = {}
+  thisnode['name'] = a
+  thisnode['label'] = node_info[a].label
+  thisnode['group'] = a[0]
+  nodesArray.push(thisnode)
 })
 
 // Loop through all nodes adding their source and target.
-Object.keys(edge_info).forEach(function(a) {
-  var thisedge = {},
-      source = edge_info[a].v,
-      target = edge_info[a].w;
-  thisedge["source"] = node_info[source].i;
-  thisedge["target"] = node_info[target].i;
-  linksArray.push(thisedge);
+Object.keys(edge_info).forEach(function (a) {
+  var thisedge = {}
+  var source = edge_info[a].v
+  var target = edge_info[a].w
+  thisedge['source'] = node_info[source].i
+  thisedge['target'] = node_info[target].i
+  linksArray.push(thisedge)
 })
 
 // Create graph object.
 var graph = {
-  "nodes": nodesArray, "links": linksArray
+  'nodes': nodesArray, 'links': linksArray
 }
 
 // Make d3 force layout.
@@ -154,100 +154,89 @@ function showGroup(group) {
 }
 
 // Enlarging different groups of nodes by group with buttons.
-document.getElementById("showquestions").onclick = function () {
-  showGroup("q")
-  showAll(selectedIndices);
-}
-document.getElementById("showanswers").onclick = function () {
-  showGroup("a")
+document.getElementById('showquestions').onclick = function () {
+  showGroup('q')
   showAll(selectedIndices)
 }
-document.getElementById("showtopics").onclick = function () {
-  showGroup("t")
-  showAll(selectedIndices);
+document.getElementById('showanswers').onclick = function () {
+  showGroup('a')
+  showAll(selectedIndices)
+}
+document.getElementById('showtopics').onclick = function () {
+  showGroup('t')
+  showAll(selectedIndices)
 }
 
-function showAll(indexArray) {
-  d3.selectAll("g")
-    .classed("bignodes", false)
-    .classed("bignodes", function (d, i) {
-      return $.inArray(d.index, indexArray) > -1;
-    });
-  force.start();
+function showAll (indexArray) {
+  d3.selectAll('g')
+    .classed('bignodes', false)
+    .classed('bignodes', function (d, i) {
+      return $.inArray(d.index, indexArray) > -1
+    })
+  force.start()
 }
 
-svg.attr("width", width)
-   .attr("height", height);
+svg.attr('width', width)
+   .attr('height', height)
 
-var link = svg.selectAll(".link")
+var link = svg.selectAll('.link')
               .data(graph.links)
-              .enter().append("line")
-              .attr("class", "link");
+              .enter().append('line')
+              .attr('class', 'link')
 
-var node = svg.selectAll(".node")
+var node = svg.selectAll('.node')
               .data(graph.nodes)
-              .enter().append("g")
-              .attr("class", "node")
+              .enter().append('g')
+              .attr('class', 'node')
               .call(force.drag)
-              .on('dblclick', connectedNodes);
+              .on('dblclick', connectedNodes)
 
-node.append("circle")
-    .attr("cx", function(d) { return d.x; })
-    .attr("cy", function(d) { return d.y; })
-    .attr("r", 5)
-    .style("fill", function(d) { return color(d.group) });
+node.append('circle')
+    .attr('cx', function (d) { return d.x })
+    .attr('cy', function (d) { return d.y })
+    .attr('r', 5)
+    .style('fill', function (d) { return color(d.group) })
 
-node.append("foreignObject")
-    .attr("dx", -200)
-    .attr("dy", -10)
-    .attr("width", 200)
-    .append("xhtml:body")
-    .classed("textbox", true)
-    .style("background-color", function(d) { return color(d.group) })
-    .style("border-radius", "5px")
-    .text(function(d) { return d.label })
-    .call(force.drag);
+node.append('foreignObject')
+    .attr('dx', -200)
+    .attr('dy', -10)
+    .attr('width', 200)
+    .append('xhtml:body')
+    .classed('textbox', true)
+    .style('background-color', function (d) { return color(d.group) })
+    .style('border-radius', '5px')
+    .text(function (d) { return d.label })
+    .call(force.drag)
 
-node.append("title")
-    .text(function(d) { return d.label; });
+node.append('title')
+    .text(function (d) { return d.label })
 
-var optArray = graph.nodes.map(function(node) {
-  return {
-    value: node.name,
-    label: node.label
-  }
+var optArray = []
+for (var i = 0; i < graph.nodes.length - 1; i++) {
+  optArray.push(graph.nodes[i].name)
+}
+optArray = optArray.sort()
+$(function () {
+  $('#search').autocomplete({
+    source: optArray
+  })
 })
 
-$(function () {
-  $("#search").autocomplete({
-    source: optArray,
-    focus: function( event, ui ) {
-      $( "#search" ).val( ui.item.label );
-      return false;
-    },
-    select: function( event, ui ) {
-      $( "#search" ).val( ui.item.label );
-      $( "#search-id" ).val( ui.item.value );
-      return false;
-    }
-  });
-});
-
-function searchNode() {
-    //find the node
-    var selectedVal = document.getElementById('search-id').value;
-    var node = svg.selectAll(".node");
-    if (selectedVal == "none") {
-        node.style("stroke", "white").style("stroke-width", "1");
-    } else {
-        var selected = node.filter(function (d, i) {
-            return d.name != selectedVal;
-        });
-        selected.style("opacity", "0");
-        var link = svg.selectAll(".link")
-        link.style("opacity", "0");
-        d3.selectAll(".node, .link").transition()
-            .duration(5000)
-            .style("opacity", 1);
-    }
+function searchNode () {
+  // find the node
+  var selectedVal = document.getElementById('search').value
+  var node = svg.selectAll('.node')
+  if (selectedVal === 'none') {
+    node.style('stroke', 'white').style('stroke-width', '1')
+  } else {
+    var selected = node.filter(function (d, i) {
+      return d.name !== selectedVal
+    })
+    selected.style('opacity', '0')
+    var link = svg.selectAll('.link')
+    link.style('opacity', '0')
+    d3.selectAll('.node, .link').transition()
+      .duration(5000)
+      .style('opacity', 1)
+  }
 }
