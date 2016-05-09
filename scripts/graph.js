@@ -63,8 +63,6 @@ function collide (alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes)
   return function (d) {
     var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 75 : radius + 5
-    var nx1 = d.x - rb
-    var nx2 = d.x + rb
     var ny1 = d.y - rb
     var ny2 = d.y + rb
     quadtree.visit(function (quad, x1, y1, x2, y2) {
@@ -74,13 +72,11 @@ function collide (alpha) {
         var l = Math.sqrt(x * x + y * y)
         if (l < rb) {
           l = (l - rb) / l * alpha
-          d.x -= x *= l
           d.y -= y *= l / 2
-          quad.point.x += x
           quad.point.y += y
         }
       }
-      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+      return y1 > ny2 || y2 < ny1
     })
   }
 }
