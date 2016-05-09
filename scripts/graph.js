@@ -1,6 +1,6 @@
 // Set the size of diagram.
 var width = 1800
-var height = 1100
+var height = 1000
 var color = d3.scale.category10()
 var selectedIndices = []
 
@@ -151,11 +151,45 @@ function connectedNodes () {
 
 function tick (e) {
   var k = 0.1 * e.alpha
-  d3.selectAll('circle').attr('cx', function (d) { return d.x })
-                        .attr('cy', function (d) { return d.y })
+  d3.selectAll('circle')
+    .attr('cx', function (d) {
+      if (d.group === 'q') {
+        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+      } else if (d.group === 'a') {
+        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+      } else if (d.group === 't') {
+        return d.x = Math.max(radius, Math.min(width - radius, d.x))
+      }
+    })
+    .attr('cy', function (d) {
+      if (d.group === 'q') {
+        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+      } else if (d.group === 'a') {
+        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+      } else if (d.group === 't') {
+        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+      }
+    })
 
-  d3.selectAll('foreignObject').attr('x', function (d) { return d.x - 100 })
-                               .attr('y', function (d) { return d.y - 10 })
+  d3.selectAll('foreignObject')
+    .attr('x', function (d) {
+      if (d.group === 'q') {
+        return d.x - 100
+      } else if (d.group === 'a') {
+        return d.x - 100
+      } else if (d.group === 't') {
+        return d.x - 100
+      }
+    })
+    .attr('y', function (d) {
+      if (d.group === 'q') {
+        return d.y - 10
+      } else if (d.group === 'a') {
+        return d.y - 10
+      } else if (d.group === 't') {
+        return d.y - 10
+      }
+    })
 
   link.each(function (d) { d.source.y -= k; d.target.y += k })
       .attr('x1', function (d) { return d.source.x })
