@@ -93,30 +93,60 @@ for (i = 0; i < graph.nodes.length; i++) {
   linkedByIndex[i + ',' + i] = true
 }
 graph.links.forEach(function (d) {
-    linkedByIndex[d.source.index + "," + d.target.index] = true;
-});
-//This function looks up whether a pair are neighbours
-function neighboring(a, b) {
-    return linkedByIndex[a.index + "," + b.index];
+  linkedByIndex[d.source.index + ',' + d.target.index] = true
+})
+// This function looks up whether a pair are neighbours
+function neighboring (a, b) {
+  return linkedByIndex[a.index + ',' + b.index]
 }
-function connectedNodes() {
-    if (!toggle) {
-        //Reduce the opacity of all but the neighbouring nodes
-        d = d3.select(this).node().__data__;
-        node.style("opacity", function (o) {
-            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
-        });
-        link.style("opacity", function (o) {
-            return d.index == o.source.index | d.index == o.target.index ? 1 : 0.1;
-        });
-        //Reduce the op
-        toggle = true;
-    } else {
-        //Put them back to opacity=1
-        node.style("opacity", 1);
-        link.style("opacity", 1);
-        toggle = false;
+
+// This function finds the direct decendents of a node.
+function findChildren (a) {
+  var children = []
+  graph.links.forEach(function (d) {
+    if (d.source === a) { children.push(d.target) }
+  })
+  return children
+}
+
+function downstream (a) {
+  var nodes = []
+  var children = findChildren(a)
+  nodes.push.apply(nodes, children)
+  children.forEach(function (n) {
+    nodes.push.apply(nodes, downstream(n))
+  })
+  return nodes
+}
+
+function getDownstream (a) {
+  return [a].concat(downstream(a))
+}
+
+function connectedNodes () {
+  if (!toggle) {
+  // Reduce the opacity of all but the neighbouring nodes
+    var d = d3.select(this).node().__data__
+    // If selected node is a question, select all downstream, otherwise select direct neighbours
+    if (d.group !== 'q') {
+      node.style('opacity', function (o) {
+        return neighboring(d, o) || neighboring(o, d) ? 1 : 0.1
+      })
+      link.style('opacity', function (o) {
+        return d.index === o.source.index || d.index === o.target.index ? 1 : 0.1
+      })
+    } else if (d.group === 'q') {
+      node.style('opacity', function (o) {
+        return ($.inArray(o, getDownstream(d)) > -1) ? 1 : 0.1
+      })
     }
+    toggle = true
+  } else {
+  // Put them back to opacity=1
+    node.style('opacity', 1)
+    link.style('opacity', 1)
+    toggle = false
+  }
 }
 
 function tick (e) {
