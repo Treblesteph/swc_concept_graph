@@ -48,52 +48,50 @@ var force = d3.layout.force()
                      .charge(0)
                      .friction(0.1)
                      .size([width, height])
-                     .on("tick", tick)
-                     .start();
+                     .on('tick', tick)
+                     .start()
 
 // Create the svg for the graph.
-var svg = d3.select("#graph-container")
-            .append("svg")
-            .attr("class", "overlay")
+var svg = d3.select('#graph-container')
+            .append('svg')
+            .attr('class', 'overlay')
 
 // Collision avoidance function.
-var padding = 10,
-    clusterPadding = 6,
-    radius = 10;
+var radius = 10
 
-function collide(alpha) {
-  var quadtree = d3.geom.quadtree(graph.nodes);
-  return function(d) {
-    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 200 : radius + 5,
-        nx1 = d.x - rb,
-        nx2 = d.x + rb,
-        ny1 = d.y - rb / 2,
-        ny2 = d.y + rb / 2;
-    quadtree.visit(function(quad, x1, y1, x2, y2) {
+function collide (alpha) {
+  var quadtree = d3.geom.quadtree(graph.nodes)
+  return function (d) {
+    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 200 : radius + 5
+    var nx1 = d.x - rb
+    var nx2 = d.x + rb
+    var ny1 = d.y - rb / 2
+    var ny2 = d.y + rb / 2
+    quadtree.visit(function (quad, x1, y1, x2, y2) {
       if (quad.point && (quad.point !== d)) {
-        var x = d.x - quad.point.x,
-            y = d.y - quad.point.y,
-            l = Math.sqrt(x * x + y * y);
-          if (l < rb) {
-          l = (l - rb) / l * alpha;
-          d.x -= x *= l;
-          d.y -= y *= l / 2;
-          quad.point.x += x;
-          quad.point.y += y;
+        var x = d.x - quad.point.x
+        var y = d.y - quad.point.y
+        var l = Math.sqrt(x * x + y * y)
+        if (l < rb) {
+          l = (l - rb) / l * alpha
+          d.x -= x *= l
+          d.y -= y *= l / 2
+          quad.point.x += x
+          quad.point.y += y
         }
       }
-      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-    });
-  };
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+    })
+  }
 }
 
-//Toggle stores whether the highlighting is on
-var toggle = false;
-//Create an array logging what is connected to what
-var linkedByIndex = {};
+// Toggle stores whether the highlighting is on.
+var toggle = false
+// Create an array logging what is connected to what
+var linkedByIndex = {}
 for (i = 0; i < graph.nodes.length; i++) {
-    linkedByIndex[i + "," + i] = true;
-};
+  linkedByIndex[i + ',' + i] = true
+}
 graph.links.forEach(function (d) {
     linkedByIndex[d.source.index + "," + d.target.index] = true;
 });
@@ -121,32 +119,32 @@ function connectedNodes() {
     }
 }
 
-function tick(e) {
-  var k = 0.1 * e.alpha;
-  d3.selectAll("circle").attr("cx", function(d) { return d.x; })
-                        .attr("cy", function(d) { return d.y; })
+function tick (e) {
+  var k = 0.1 * e.alpha
+  d3.selectAll('circle').attr('cx', function (d) { return d.x })
+                        .attr('cy', function (d) { return d.y })
 
-  d3.selectAll("foreignObject").attr("x", function(d) { return d.x - 100; })
-                               .attr("y", function(d) { return d.y - 10; })
+  d3.selectAll('foreignObject').attr('x', function (d) { return d.x - 100 })
+                               .attr('y', function (d) { return d.y - 10 })
 
-  link.each(function(d) { d.source.y -= k, d.target.y += k; })
-      .attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
+  link.each(function (d) { d.source.y -= k; d.target.y += k })
+      .attr('x1', function (d) { return d.source.x })
+      .attr('y1', function (d) { return d.source.y })
+      .attr('x2', function (d) { return d.target.x })
+      .attr('y2', function (d) { return d.target.y })
 
-  node.each(collide(0.5));
+  node.each(collide(0.5))
 }
 
-setTimeout(function() {
-  selectedIndices = showGroup("q")
-  showAll(selectedIndices);
+setTimeout(function () {
+  selectedIndices = showGroup('q')
+  showAll(selectedIndices)
 }, 2000)
 
-function showGroup(group) {
-  selectedIndices = [];
-  graph.nodes.forEach(function(d) {
-    if (d.group == group) {
+function showGroup (group) {
+  selectedIndices = []
+  graph.nodes.forEach(function (d) {
+    if (d.group === group) {
       selectedIndices.push(d.index)
     }
   })
