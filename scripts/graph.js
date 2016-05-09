@@ -101,26 +101,26 @@ function neighboring (a, b) {
 }
 
 // This function finds the direct decendents of a node.
-function findChildren (a) {
+function findChildren (i) {
   var children = []
-  graph.links.forEach(function (d) {
-    if (d.source === a) { children.push(d.target) }
+  graph.links.forEach(function (l) {
+    if (l.source.index === i) { children.push(l.target.index) }
   })
   return children
 }
 
-function downstream (a) {
+function downstream (i) {
   var nodes = []
-  var children = findChildren(a)
+  var children = findChildren(i)
   nodes.push.apply(nodes, children)
-  children.forEach(function (n) {
-    nodes.push.apply(nodes, downstream(n))
+  children.forEach(function (j) {
+    nodes.push.apply(nodes, downstream(j))
   })
   return nodes
 }
 
-function getDownstream (a) {
-  return [a].concat(downstream(a))
+function getDownstream (k) {
+  return [k].concat(downstream(k))
 }
 
 function connectedNodes () {
@@ -136,9 +136,9 @@ function connectedNodes () {
         return d.index === o.source.index || d.index === o.target.index ? 1 : 0.1
       })
     } else if (d.group === 'q') {
-      node.style('opacity', function (o) {
-        return ($.inArray(o, getDownstream(d)) > -1) ? 1 : 0.1
-      })
+      selectedIndices = getDownstream(d.index)
+      showAll(selectedIndices)
+
     }
     toggle = true
   } else {
