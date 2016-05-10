@@ -1,6 +1,6 @@
 // Set the size of diagram.
 var width = 1800
-var height = 1000
+var height = 1500
 var color = d3.scale.category10()
 var boxwidth = 200
 var selectedIndices = []
@@ -63,7 +63,7 @@ var radius = 10
 function collide (alpha) {
   var quadtree = d3.geom.quadtree(graph.nodes)
   return function (d) {
-    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 75 : radius + 5
+    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 75 : 0
     var ny1 = d.y - rb
     var ny2 = d.y + rb
     quadtree.visit(function (quad, x1, y1, x2, y2) {
@@ -193,13 +193,13 @@ function tick (e) {
       .attr('x2', function (d) { return d.target.x })
       .attr('y2', function (d) { return d.target.y })
 
-  node.each(collide(0.5))
+  node.each(collide(0.2))
 }
 
 setTimeout(function () {
   selectedIndices = showGroup('q')
   showAll(selectedIndices)
-}, 2000)
+}, 100)
 
 function showGroup (group) {
   selectedIndices = []
