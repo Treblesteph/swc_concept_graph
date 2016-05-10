@@ -10,7 +10,6 @@
 }
 
 .node foreignObject {
-  pointer-events: none;
   font: 0px sans-serif;
   padding: 0px;
   color: white;
