@@ -2,6 +2,7 @@
 var width = 1800
 var height = 1000
 var color = d3.scale.category10()
+var boxwidth = 200
 var selectedIndices = []
 
 // Read in data and convert to more simple object.
@@ -149,7 +150,7 @@ function tick (e) {
   d3.selectAll('circle')
     .attr('cx', function (d) {
       if (d.group === 'q') {
-        return d.x = width / 6
+        return d.x = boxwidth / 2
       } else if (d.group === 'a') {
         return d.x = width / 2
       } else if (d.group === 't') {
@@ -169,11 +170,11 @@ function tick (e) {
   d3.selectAll('foreignObject')
     .attr('x', function (d) {
       if (d.group === 'q') {
-        return d.x - 100
+        return d.x - boxwidth / 2
       } else if (d.group === 'a') {
-        return d.x - 100
+        return d.x - boxwidth / 2
       } else if (d.group === 't') {
-        return d.x - 100
+        return d.x - boxwidth / 2
       }
     })
     .attr('y', function (d) {
@@ -255,9 +256,9 @@ node.append('circle')
     .style('fill', function (d) { return color(d.group) })
 
 node.append('foreignObject')
-    .attr('dx', -200)
+    .attr('dx', -boxwidth)
     .attr('dy', -10)
-    .attr('width', 200)
+    .attr('width', boxwidth)
     .append('xhtml:body')
     .classed('textbox', true)
     .style('background-color', function (d) { return color(d.group) })
