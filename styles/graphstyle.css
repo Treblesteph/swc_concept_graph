@@ -29,6 +29,15 @@
 
 .bignodes .textbox {
   padding: 10px !important;
+  border-color: white !important;
+}
+
+.faded .textbox {
+  opacity: 0.1 !important;
+}
+
+.faded circle {
+  opacity: 0.1 !important;
 }
 
 button, input {
