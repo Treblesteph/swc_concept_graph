@@ -25,10 +25,13 @@
 
 .bignodes foreignObject {
   font: 12px sans-serif !important;
+  z-index: 999;
 }
 
 .bignodes .textbox {
   padding: 10px !important;
+  border-top-width : 5px !important;
+  border-bottom-width : 5px !important;
   border-color: white !important;
 }
 
