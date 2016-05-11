@@ -126,12 +126,14 @@ function connectedNodes () {
     var d = d3.select(this).node().__data__
     // If selected node is a question, select all downstream, otherwise select direct neighbours
     if (d.group !== 'q') {
-      node.style('opacity', function (o) {
-        return neighboring(d, o) || neighboring(o, d) ? 1 : 0.1
-      })
-      link.style('opacity', function (o) {
-        return d.index === o.source.index || d.index === o.target.index ? 1 : 0.1
-      })
+      node.classed('faded', false)
+          .classed('faded', function (o) {
+            return !(neighboring(d, o) || neighboring(o, d))
+          })
+      link.classed('faded', false)
+          .classed('faded', function (o) {
+            return !(d.index === o.source.index || d.index === o.target.index)
+          })
     } else if (d.group === 'q') {
       selectedIndices = getDownstream(d.index)
       showAll(selectedIndices)
@@ -139,8 +141,8 @@ function connectedNodes () {
     toggle = true
   } else {
   // Put them back to opacity=1
-    node.style('opacity', 1)
-    link.style('opacity', 1)
+    node.classed('faded', false)
+    link.classed('faded', false)
     toggle = false
   }
 }
