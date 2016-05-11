@@ -243,6 +243,7 @@ var link = svg.selectAll('.link')
               .data(graph.links)
               .enter().append('line')
               .attr('class', 'link')
+              .style('marker-end', 'url(#suit)')
 
 var node = svg.selectAll('.node')
               .data(graph.nodes)
