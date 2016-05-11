@@ -60,28 +60,6 @@ var svg = d3.select('#graph-container')
 // Collision avoidance function.
 var radius = 10
 
-function collide (alpha) {
-  var quadtree = d3.geom.quadtree(graph.nodes)
-  return function (d) {
-    var rb = ($.inArray(d.index, selectedIndices) > -1) ? radius + 75 : 0
-    var ny1 = d.y - rb
-    var ny2 = d.y + rb
-    quadtree.visit(function (quad, x1, y1, x2, y2) {
-      if (quad.point && (quad.point !== d)) {
-        var x = d.x - quad.point.x
-        var y = d.y - quad.point.y
-        var l = Math.sqrt(x * x + y * y)
-        if (l < rb) {
-          l = (l - rb) / l * alpha
-          d.y -= y *= l / 2
-          quad.point.y += y
-        }
-      }
-      return y1 > ny2 || y2 < ny1
-    })
-  }
-}
-
 // Toggle stores whether the highlighting is on.
 var toggle = false
 // Create an array logging what is connected to what
@@ -194,8 +172,6 @@ function tick (e) {
       .attr('y1', function (d) { return d.source.y })
       .attr('x2', function (d) { return d.target.x })
       .attr('y2', function (d) { return d.target.y })
-
-  node.each(collide(0.2))
 }
 
 setTimeout(function () {
