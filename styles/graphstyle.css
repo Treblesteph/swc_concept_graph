@@ -32,12 +32,9 @@
   border-color: white !important;
 }
 
-.faded .textbox {
+.faded {
   opacity: 0.1 !important;
-}
-
-.faded circle {
-  opacity: 0.1 !important;
+  stroke-opacity: 0.1 !important;
 }
 
 button, input {
