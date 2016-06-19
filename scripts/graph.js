@@ -3,6 +3,7 @@ var width = 1800
 var height = 1500
 var color = d3.scale.category10()
 var boxwidth = 200
+var maxboxheight = 140
 var selectedIndices = []
 
 // Read in data and convert to more simple object.
@@ -41,13 +42,30 @@ var graph = {
   'nodes': nodesArray, 'links': linksArray
 }
 
+// Determine the maximum number of items per column
+
+var ntopics = 0
+var nquestions = 0
+var nanswers = 0
+
+graph.nodes.forEach(function (k) {
+  if (k.group === "q") {
+    nquestions += 1
+  } else if (k.group === "a") {
+    nanswers += 1
+  } else if (k.group === "t") {
+    ntopics += 1
+  }
+})
+
+console.log(nquestions)
+console.log(nanswers)
+console.log(ntopics);
+
 // Make d3 force layout.
 var force = d3.layout.force()
                      .nodes(graph.nodes)
                      .links(graph.links)
-                     .gravity(0.1)
-                     .charge(0)
-                     .friction(0.1)
                      .size([width, height])
                      .on('tick', tick)
                      .start()
@@ -238,6 +256,7 @@ node.append('foreignObject')
     .attr('dx', -boxwidth)
     .attr('dy', -10)
     .attr('width', boxwidth)
+    .attr('height', maxboxheight)
     .append('xhtml:body')
     .classed('textbox', true)
     .style('background-color', function (d) { return color(d.group) })
@@ -258,6 +277,15 @@ $(function () {
     source: optArray
   })
 })
+
+d3.selectAll('.textbox')
+  .call(function (obj) {
+    var box_arr = obj[0]
+    box_arr.forEach(function (box) {
+      console.log(box.getBoundingClientRect().height)
+      console.log($(box).outerHeight())
+    })
+  })
 
 svg.append('defs').selectAll('marker')
    .data(['suit', 'licensing', 'resolved'])
