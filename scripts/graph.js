@@ -2,7 +2,7 @@
 var width = 1800
 var color = d3.scale.category10()
 var boxwidth = 200
-var maxboxheight = 140
+var maxboxheight = 65
 var selectedIndices = []
 
 // Read in data and convert to more simple object.
@@ -41,6 +41,7 @@ var graph = {
   'nodes': nodesArray, 'links': linksArray
 }
 
+// Setting parameters for even y-placement of boxes
 // Determine the maximum number of items per column
 
 var nquestions = 0
@@ -59,6 +60,30 @@ graph.nodes.forEach(function (k) {
 
 var maxboxespercol = Math.max(nquestions, nanswers, ntopics)
 var height = maxboxespercol * maxboxheight
+
+// Find L: distance between box centres for each column
+
+var Lquestions = (height - maxboxheight * nquestions) / (1 + nquestions)
+var Lanswers = (height - maxboxheight * nanswers) / (1 + nanswers)
+var Ltopics = (height - maxboxheight * ntopics) / (1 + ntopics)
+
+// Set y positions for boxes in question, answer, and topic columns
+
+var q_ypositions = []
+var a_ypositions = []
+var t_ypositions = []
+
+for (i = 0; i < nquestions; i++) {
+  q_ypositions[i] = Lquestions * (i + 1) + maxboxheight * (i + 0.5)
+}
+
+for (i = 0; i < nanswers; i++) {
+  a_ypositions[i] = Lanswers * (i + 1) + maxboxheight * (i + 0.5)
+}
+
+for (i = 0; i < ntopics; i++) {
+  t_ypositions[i] = Ltopics * (i + 1) + maxboxheight * (i + 0.5)
+}
 
 // Make d3 force layout.
 var force = d3.layout.force()
@@ -155,11 +180,11 @@ function tick (e) {
     })
     .attr('cy', function (d) {
       if (d.group === 'q') {
-        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+        return d.y = q_ypositions[d.index]
       } else if (d.group === 'a') {
-        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+        return d.y = a_ypositions[d.index - nquestions]
       } else if (d.group === 't') {
-        return d.y = Math.max(radius, Math.min(height - radius, d.y))
+        return d.y = t_ypositions[d.index - (nquestions + nanswers)]
       }
     })
 
