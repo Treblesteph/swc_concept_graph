@@ -58,10 +58,6 @@ graph.nodes.forEach(function (k) {
   }
 })
 
-console.log(nquestions)
-console.log(nanswers)
-console.log(ntopics);
-
 // Make d3 force layout.
 var force = d3.layout.force()
                      .nodes(graph.nodes)
@@ -282,8 +278,6 @@ d3.selectAll('.textbox')
   .call(function (obj) {
     var box_arr = obj[0]
     box_arr.forEach(function (box) {
-      console.log(box.getBoundingClientRect().height)
-      console.log($(box).outerHeight())
     })
   })
 
