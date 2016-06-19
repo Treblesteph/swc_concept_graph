@@ -1,6 +1,5 @@
 // Set the size of diagram.
 var width = 1800
-var height = 1500
 var color = d3.scale.category10()
 var boxwidth = 200
 var maxboxheight = 140
@@ -44,9 +43,9 @@ var graph = {
 
 // Determine the maximum number of items per column
 
-var ntopics = 0
 var nquestions = 0
 var nanswers = 0
+var ntopics = 0
 
 graph.nodes.forEach(function (k) {
   if (k.group === "q") {
@@ -57,6 +56,9 @@ graph.nodes.forEach(function (k) {
     ntopics += 1
   }
 })
+
+var maxboxespercol = Math.max(nquestions, nanswers, ntopics)
+var height = maxboxespercol * maxboxheight
 
 // Make d3 force layout.
 var force = d3.layout.force()
