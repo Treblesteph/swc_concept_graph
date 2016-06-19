@@ -17,6 +17,7 @@
 
 .node circle {
   stroke: white;
+  z-index: 100;
 }
 
 .bignodes circle {
@@ -26,6 +27,7 @@
 .bignodes foreignObject {
   font: 12px sans-serif !important;
   z-index: 999;
+  overflow: hidden;
 }
 
 .bignodes .textbox {
