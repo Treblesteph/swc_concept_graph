@@ -274,13 +274,6 @@ $(function () {
   })
 })
 
-d3.selectAll('.textbox')
-  .call(function (obj) {
-    var box_arr = obj[0]
-    box_arr.forEach(function (box) {
-    })
-  })
-
 svg.append('defs').selectAll('marker')
    .data(['suit', 'licensing', 'resolved'])
    .enter().append('marker')
